@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <ul>
+      <% for(var i = 0; i < playlists.length; i++) { %>
+          <li>
+            <a href="/playlists/<%=playlists[i].id%>"><%=playlists[i].title%></a>
+          </li>
+      <% } %>
+    </ul>
+  </body>
+</html>

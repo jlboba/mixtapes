@@ -9,7 +9,11 @@ var router = express();
 // ====================== GET ROUTES ====================
 // index page
 router.get('/', function(req, res){
-  res.send('playlist index route');
+  Playlist.find({}, function(err, foundPlaylists){
+    res.render('playlists/playlists-index.ejs', {
+      playlists: foundPlaylists
+    });
+  });
 });
 
 // create new playlist page
@@ -28,6 +32,15 @@ router.get('/:id/add-songs', function(req, res){
   });
 });
 
+// show playlist page
+router.get('/:id', function(req, res){
+  Playlist.findById(req.params.id, function(err, foundPlaylist){
+    res.render('playlists/playlists-show.ejs', {
+      playlist: foundPlaylist
+    });
+  });
+});
+
 // ====================== ACTION ROUTES =================
 // create a playlist
 router.post('/', function(req, res){
@@ -42,8 +55,7 @@ router.post('/:id', function(req, res){
     Playlist.findById(req.params.id, function(err, foundPlaylist){
       foundPlaylist.songs = createdSongs;
       foundPlaylist.save(function(err, savedPlaylist){
-        console.log(foundPlaylist);
-        res.redirect('/');
+        res.redirect('/playlists');
       });
     });
   });

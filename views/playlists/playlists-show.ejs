@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%=playlist.title%> | MIXTAPES</title>
+  </head>
+  <body>
+    <h1><%=playlist.title%></h1>
+    <img src="<%=playlist.coverImage%>">
+    <p>
+      <%=playlist.description%>
+    </p>
+    <ul>
+      <% for(var i = 0; i < playlist.songs.title.length; i++){ %>
+          <li>
+            <a href="<%=playlist.songs.link[i]%>"><%=playlist.songs.title[i]%> - <%=playlist.songs.artist[i]%></a>
+            <p>
+              <%=playlist.songs.description[i]%>
+            </p>
+          </li>
+      <% } %>
+    </ul>
+  </body>
+</html>
