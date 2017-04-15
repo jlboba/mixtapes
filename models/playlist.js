@@ -10,7 +10,7 @@ var playlistSchema = Schema({
   creator: { type: String, required: true },
   coverImage: { type: String, default: 'http://placehold.it/500x500.png' },
   description: { type: String },
-  songs: { type: [Song.schema], min: 5 },
+  songs: { type: [Song.schema] },
   likes: { type: Number },
   comments: [Comments.schema],
   privOrPub: Boolean

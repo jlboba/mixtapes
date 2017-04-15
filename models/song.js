@@ -4,10 +4,10 @@ var mongoose = require('mongoose');
 // ====================== SCHEMA ========================
 var Schema = mongoose.Schema;
 var songSchema = Schema({
-  title: { type: String, required: true },
-  artist: { type: String, required: true },
-  link: { type: String, required: true },
-  description: { type: String },
+  title: { type: Array, required: true },
+  artist: { type: Array, required: true },
+  link: { type: Array, required: true },
+  description: { type: Array },
   likes: { type: Number }
 });
 

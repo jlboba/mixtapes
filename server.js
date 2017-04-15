@@ -21,13 +21,21 @@ var userController = require('./controllers/users.js');
 app.use('/users', userController);
 
 // playlist
+var playlistController = require('./controllers/playlists.js');
+app.use('/playlists', playlistController);
 
-// sessions
+// session
 
 // ====================== GET ROUTES ====================
 // main index route
 app.get('/', function(req, res){
-  res.send('main index route working');
+  res.render('index.ejs');
+});
+
+// 404 - if page cannot be found, render the 404 page
+app.use(function(req, res){
+  res.status(404);
+  res.render('404.ejs');
 });
 
 // ================ MONGOOSE CONNECTION =================
