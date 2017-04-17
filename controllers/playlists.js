@@ -50,6 +50,15 @@ router.get('/:id/edit', function(req, res){
   });
 });
 
+// edit playlist songs page
+router.get('/edit-songs/:id', function(req, res){
+  Playlist.findById(req.params.id, function(err, foundPlaylist){
+    res.render('songs/songs-edit.ejs', {
+      playlist: foundPlaylist
+    });
+  });
+});
+
 // ====================== ACTION ROUTES =================
 // create a playlist
 router.post('/', function(req, res){
@@ -90,7 +99,6 @@ router.delete('/:id', function(req, res){
 // edit playlist info
 router.put('/:id', function(req, res){
   Playlist.findByIdAndUpdate(req.params.id, req.body, function(err, updatedPlaylist){
-    console.log(updatedPlaylist);
       User.findOne({ 'username': updatedPlaylist.creator }, function(err, foundUser){
         foundUser.playlists.id(req.params.id).remove();
         foundUser.playlists.push(updatedPlaylist);
@@ -98,6 +106,13 @@ router.put('/:id', function(req, res){
           res.redirect('/playlists');
         });
       });
+  });
+});
+
+// edit playlist songs
+router.put('/edit-songs/:id', function(req, res){
+  Playlist.findById(req.params.id, function(err, foundPlaylist){
+    console.log(foundPlaylist);
   });
 });
 

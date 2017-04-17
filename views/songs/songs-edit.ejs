@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="/playlists/edit-songs/<%=playlist.id%>?_method=PUT" method="POST">
+    <% for(var i = 0; i < playlist.songs.title.length; i++){ %>
+        <input type="text" name="songTitle" placeholder="song title" value="<%=playlist.songs.title[i]%>" />
+        <input type="text" name="artist" placeholder="song artist" value="<%=playlist.songs.artist[i]%>"/>
+        <input type="text" name="link" placeholder="youtube link to song" value="<%=playlist.songs.link[i]%>"/>
+        <input type="text" name="songDescription" placeholder="description of song" value="<%=playlist.songs.description[i]%>"/><br />
+    <% } %>
+    </form>
+  </body>
+</html>

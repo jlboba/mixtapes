@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <img src="<%=user.icon%>">
+    <h1><%=user.displayName%> (@<%=user.username%>)</h1>
+    <blockquote>
+      <%=user.description%>
+    </blockquote>
+    <h2><%=user.displayName%>'s playlists</h2>
+    <ul>
+      <% for(var i = 0; i < user.playlists.length; i++) {%>
+          <li>
+            <a href="/playlists/<%=user.playlists[i].id%>"><%=user.playlists[i].title%></a>
+          </li>
+      <% } %>
+    </ul>
+    <a href="/users/<%=user.id%>/edit">edit account</a>
+    <form action="/users/<%=user.id%>?_method=DELETE" method="POST">
+      <input type="submit" value="delete account" />
+    </form>
+  </body>
+</html>

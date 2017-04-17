@@ -7,14 +7,37 @@ var Comments = require('../models/comment.js');
 var router = express();
 
 // ====================== GET ROUTES ====================
+// users index page
 router.get('/', function(req, res){
-  res.send('user index route');
+  User.find({}, function(err, foundUsers){
+    res.render('users/users-index.ejs', {
+      users: foundUsers
+    });
+  });
 });
 
+// create new user page
 router.get('/new', function(req, res){
   res.render('users/users-new.ejs');
 });
 
+// show user page
+router.get('/:id', function(req, res){
+  User.findById(req.params.id, function(err, foundUser){
+    res.render('users/users-show.ejs', {
+      user: foundUser
+    });
+  });
+});
+
+// edit user page
+router.get('/:id/edit', function(req, res){
+  User.findById(req.params.id, function(err, foundUser){
+    res.render('users/users-edit.ejs', {
+      user: foundUser
+    });
+  });
+});
 // ====================== ACTION ROUTES =================
 router.post('/', function(req, res){
   if(req.body.icon === ""){ // if the user didn't put an icon
