@@ -55,8 +55,19 @@ router.post('/', function(req, res){
 
 // edit an account
 router.put('/:id', function(req, res){
-  User.findByIdAndUpdate(req.params.id, req.body, function(err, updatedUser){
-    res.redirect('/users/' + req.params.id);
+  User.findByIdAndUpdate(req.params.id, req.body, function(err, foundUser){
+    if (foundUser.username !== req.body.username){
+      for (var i = 0; i < foundUser.playlists.length; i++){
+        Playlist.findById(foundUser.playlists[i]._id, function(err, foundPlaylist){
+          foundPlaylist.creator = req.body.username;
+          foundPlaylist.save(function(err, savedPlaylist){
+            res.redirect('/users/' + req.params.id);
+          });
+        });
+      }
+    } else {
+        res.redirect('/users/' + req.params.id);
+    }
   });
 });
 

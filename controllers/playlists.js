@@ -35,8 +35,11 @@ router.get('/:id/add-songs', function(req, res){
 // show playlist page
 router.get('/:id', function(req, res){
   Playlist.findById(req.params.id, function(err, foundPlaylist){
-    res.render('playlists/playlists-show.ejs', {
-      playlist: foundPlaylist
+    User.findOne({ 'username': foundPlaylist.creator }, function(err, foundUser){
+      res.render('playlists/playlists-show.ejs', {
+        playlist: foundPlaylist,
+        user: foundUser
+      });
     });
   });
 });
@@ -74,10 +77,8 @@ router.post('/:id', function(req, res){
       foundPlaylist.songs = createdSongs;
       foundPlaylist.save(function(err, savedPlaylist){
         User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
-          console.log(foundUser);
           foundUser.playlists.push(savedPlaylist);
           foundUser.save(function(err, savedUser){
-            console.log(savedUser);
             res.redirect('/playlists');
           });
         });
