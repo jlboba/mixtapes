@@ -62,7 +62,6 @@ router.get('/:id', function(req, res){
   });
 });
 
-
 // ====================== ACTION ROUTES =================
 // create a playlist
 router.post('/', function(req, res){
@@ -80,7 +79,6 @@ router.post('/:id', function(req, res){
         User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
           foundUser.playlists.push(savedPlaylist);
           foundUser.save(function(err, savedUser){
-            console.log(foundUser);
             res.redirect('/playlists');
           });
         });
@@ -95,7 +93,9 @@ router.delete('/:id', function(req, res){
     User.findOne({ 'username': deletedPlaylist.creator}, function(err, foundUser){
       foundUser.playlists.id(req.params.id).remove();
       foundUser.save(function(err, savedUser){
-        res.redirect('/playlists');
+        Song.findByIdAndRemove(deletedPlaylist.songs._id, function(err, foundSongs){
+          res.redirect('/playlists');
+        });
       });
     });
   });
@@ -118,6 +118,31 @@ router.put('/:id', function(req, res){
 router.put('/edit-songs/:id', function(req, res){
   Playlist.findById(req.params.id, function(err, foundPlaylist){
     console.log(foundPlaylist);
+  });
+});
+
+// ==================== SEEDS ===========================
+var ghibliSeed = {
+  title: ['One Summer\'s Day', 'My Neighbor Totoro', 'A Town With an Ocean View', 'Ponyo on the Cliff', 'Howl\'s Moving Castle Theme'],
+  artist: ['Joe Hisaishi', 'Joe Hisaishi', 'Joe Hisaishi', 'Joe Hisaishi', 'Joe Hisaishi'],
+  link: ['https://www.youtube.com/watch?v=BEtJxfhxRh8', 'https://www.youtube.com/watch?v=I1RhMA5NpsM', 'https://www.youtube.com/watch?v=vD1yAEWpzeQ', 'https://www.youtube.com/watch?v=jH1QrYzMeIw', 'https://www.youtube.com/watch?v=31nOaXSeqSo'],
+  description: ['From: Spirited Away', 'From: Totoro', 'From: Kikis Delivery Service', 'From: Ponyo', 'From: Howl\'s Moving Castle'],
+};
+
+// seed ghibli songs route
+router.get('/:id/seed-ghibli', function(req, res){
+  Song.create(ghibliSeed, function(err, seededSongs){
+    Playlist.findById(req.params.id, function(err, foundPlaylist){
+      foundPlaylist.songs = seededSongs;
+      foundPlaylist.save(function(err, savedPlaylist){
+        User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
+          foundUser.playlists.push(savedPlaylist);
+          foundUser.save(function(err, savedUser){
+            res.redirect('/playlists/' + req.params.id);
+          });
+        });
+      });
+    });
   });
 });
 

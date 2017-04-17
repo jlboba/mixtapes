@@ -10,7 +10,6 @@ var app = express();
 var port = process.env.PORT || 3000;
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mixtapes';
 
-
 // ===================== MIDDLEWARE =====================
 app.use(expressSession({
   secret: "aprilone",
