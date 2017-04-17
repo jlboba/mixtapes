@@ -101,7 +101,7 @@ router.delete('/:id', function(req, res){
 
 // edit playlist info
 router.put('/:id', function(req, res){
-  Playlist.findByIdAndUpdate(req.params.id, req.body, function(err, updatedPlaylist){
+  Playlist.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, updatedPlaylist){
       User.findOne({ 'username': updatedPlaylist.creator }, function(err, foundUser){
         foundUser.playlists.id(req.params.id).remove();
         foundUser.playlists.push(updatedPlaylist);

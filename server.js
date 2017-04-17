@@ -6,6 +6,11 @@ var expressSession = require('express-session');
 var methodOverride = require('method-override');
 var app = express();
 
+// =================== ENVIRONMENT ======================
+var port = process.env.PORT || 3000;
+var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mixtapes';
+
+
 // ===================== MIDDLEWARE =====================
 app.use(expressSession({
   secret: "aprilone",
@@ -39,7 +44,7 @@ app.use(function(req, res){
 });
 
 // ================ MONGOOSE CONNECTION =================
-mongoose.connect('mongodb://localhost:27017/mixtapes');
+mongoose.connect(mongoDBURI);
 var db = mongoose.connection;
 
 db.once('open', function(){
@@ -47,6 +52,6 @@ db.once('open', function(){
 });
 
 // ====================== LISTENER ======================
-app.listen(3000, function(){
-  console.log('listening!');
+app.listen(port, function(){
+  console.log('listening on port ' + port);
 });
