@@ -57,12 +57,19 @@ router.post('/', function(req, res){
 router.put('/:id', function(req, res){
   User.findByIdAndUpdate(req.params.id, req.body, function(err, foundUser){
     if (foundUser.username !== req.body.username){
+      var playlistIds = [];
       for (var i = 0; i < foundUser.playlists.length; i++){
-        Playlist.findById(foundUser.playlists[i]._id, function(err, foundPlaylist){
-          foundPlaylist.creator = req.body.username;
-          foundPlaylist.save(function(err, savedPlaylist){
-            res.redirect('/users/' + req.params.id);
-          });
+        playlistIds.push(foundUser.playlists[i]._id);
+        foundUser.playlists[i].creator = req.body.username;
+        foundUser.save(function(err, savedUser){
+          for (var i = 0; i < playlistIds.length; i++){
+            Playlist.findById(playlistIds[i], function(err, foundPlaylist){
+              foundPlaylist.creator = req.body.username;
+              foundPlaylist.save(function(err, savedPlaylist){
+                res.redirect('/users/' + req.params.id);
+              });
+            });
+          }
         });
       }
     } else {
