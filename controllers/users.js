@@ -38,7 +38,9 @@ router.get('/:id/edit', function(req, res){
     });
   });
 });
+
 // ====================== ACTION ROUTES =================
+// create an account
 router.post('/', function(req, res){
   if(req.body.icon === ""){ // if the user didn't put an icon
     req.body.icon = undefined; // set the value to undefined so that in the schema it will use the default value
@@ -48,6 +50,13 @@ router.post('/', function(req, res){
   };
   User.create(req.body, function(){
     res.redirect('/users');
+  });
+});
+
+// edit an account
+router.put('/:id', function(req, res){
+  User.findByIdAndUpdate(req.params.id, req.body, function(err, updatedUser){
+    res.redirect('/users/' + req.params.id);
   });
 });
 

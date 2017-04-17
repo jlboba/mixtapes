@@ -84,7 +84,7 @@ router.post('/:id', function(req, res){
   });
 });
 
-// delete
+// delete playlist
 router.delete('/:id', function(req, res){
   Playlist.findByIdAndRemove(req.params.id, function(err, deletedPlaylist){
     User.findOne({ 'username': deletedPlaylist.creator}, function(err, foundUser){
