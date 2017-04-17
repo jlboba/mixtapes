@@ -60,5 +60,25 @@ router.put('/:id', function(req, res){
   });
 });
 
+// delete an account
+router.delete('/:id', function(req, res){
+  User.findByIdAndRemove(req.params.id, function(err, deletedUser){
+    var playlistIds = [];
+    for(var i = 0; i < deletedUser.playlists.length; i++){
+      playlistIds.push(deletedUser.playlists[i]._id);
+    };
+    Playlist.remove(
+      {
+        _id: {
+          $in: playlistIds
+        }
+      },
+      function(err, removedPlaylists){
+        res.redirect('/users');
+      }
+    );
+  });
+});
+
 // ====================== EXPORT ========================
 module.exports = router;

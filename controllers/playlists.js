@@ -74,8 +74,10 @@ router.post('/:id', function(req, res){
       foundPlaylist.songs = createdSongs;
       foundPlaylist.save(function(err, savedPlaylist){
         User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
+          console.log(foundUser);
           foundUser.playlists.push(savedPlaylist);
           foundUser.save(function(err, savedUser){
+            console.log(savedUser);
             res.redirect('/playlists');
           });
         });
