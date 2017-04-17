@@ -32,18 +32,6 @@ router.get('/:id/add-songs', function(req, res){
   });
 });
 
-// show playlist page
-router.get('/:id', function(req, res){
-  Playlist.findById(req.params.id, function(err, foundPlaylist){
-    User.findOne({ 'username': foundPlaylist.creator }, function(err, foundUser){
-      res.render('playlists/playlists-show.ejs', {
-        playlist: foundPlaylist,
-        user: foundUser
-      });
-    });
-  });
-});
-
 // edit playlist page
 router.get('/:id/edit', function(req, res){
   Playlist.findById(req.params.id, function(err, foundPlaylist){
@@ -62,6 +50,19 @@ router.get('/edit-songs/:id', function(req, res){
   });
 });
 
+// show playlist page
+router.get('/:id', function(req, res){
+  Playlist.findById(req.params.id, function(err, foundPlaylist){
+    User.findOne({ 'username': foundPlaylist.creator }, function(err, foundUser){
+      res.render('playlists/playlists-show.ejs', {
+        playlist: foundPlaylist,
+        user: foundUser
+      });
+    });
+  });
+});
+
+
 // ====================== ACTION ROUTES =================
 // create a playlist
 router.post('/', function(req, res){
@@ -79,6 +80,7 @@ router.post('/:id', function(req, res){
         User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
           foundUser.playlists.push(savedPlaylist);
           foundUser.save(function(err, savedUser){
+            console.log(foundUser);
             res.redirect('/playlists');
           });
         });

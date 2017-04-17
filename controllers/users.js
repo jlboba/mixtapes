@@ -66,14 +66,14 @@ router.put('/:id', function(req, res){
             Playlist.findById(playlistIds[i], function(err, foundPlaylist){
               foundPlaylist.creator = req.body.username;
               foundPlaylist.save(function(err, savedPlaylist){
-                res.redirect('/users/' + req.params.id);
+                return res.redirect('/users/' + req.params.id);
               });
             });
           }
         });
       }
     } else {
-        res.redirect('/users/' + req.params.id);
+        return res.redirect('/users/' + req.params.id);
     }
   });
 });
