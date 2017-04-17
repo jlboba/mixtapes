@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EDIT <%=playlist.title%> | MIXTAPES</title>
+  </head>
+  <body>
+    <form action="/playlists/<%=playlist.id%>?_method=PUT" method="POST">
+      <input type="text" name="title" placeholder="title" value="<%=playlist.title%>">
+      <input type="text" name="coverImage" placeholder="cover image" value="<%=playlist.coverImage%>">
+      <input type="text" name="description" placeholder="description" value="<%=playlist.description%>">
+      <input type="submit" value="edit" />
+    </form>
+  </body>
+</html>
