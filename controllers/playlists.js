@@ -49,12 +49,29 @@ router.post('/', function(req, res){
   });
 });
 
-// create the songs to push into the playlist
+// create the songs to push into the playlist and push the completed playlist into the creator's playlist array
 router.post('/:id', function(req, res){
   Song.create(req.body, function(err, createdSongs){
     Playlist.findById(req.params.id, function(err, foundPlaylist){
       foundPlaylist.songs = createdSongs;
       foundPlaylist.save(function(err, savedPlaylist){
+        User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
+          foundUser.playlists.push(savedPlaylist);
+          foundUser.save(function(err, savedUser){
+            res.redirect('/playlists');
+          });
+        });
+      });
+    });
+  });
+});
+
+// delete
+router.delete('/:id', function(req, res){
+  Playlist.findByIdAndRemove(req.params.id, function(err, deletedPlaylist){
+    User.findOne({ 'username': deletedPlaylist.creator}, function(err, foundUser){
+      foundUser.playlists.id(req.params.id).remove();
+      foundUser.save(function(err, savedUser){
         res.redirect('/playlists');
       });
     });
