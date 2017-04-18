@@ -43,9 +43,9 @@ router.get('/:id/edit', function(req, res){
 
 // edit playlist songs page
 router.get('/edit-songs/:id', function(req, res){
-  Playlist.findById(req.params.id, function(err, foundPlaylist){
+  Song.findById(req.params.id, function(err, foundSongs){
     res.render('songs/songs-edit.ejs', {
-      playlist: foundPlaylist
+      songs: foundSongs
     });
   });
 });
@@ -109,7 +109,7 @@ router.put('/:id', function(req, res){
         foundUser.playlists.id(req.params.id).remove();
         foundUser.playlists.push(updatedPlaylist);
         foundUser.save(function(err, savedUser){
-          res.redirect('/playlists');
+          res.redirect('/playlists/edit-songs/' + updatedPlaylist.songs.id);
         });
       });
   });
@@ -117,8 +117,20 @@ router.put('/:id', function(req, res){
 
 // edit playlist songs
 router.put('/edit-songs/:id', function(req, res){
-  Playlist.findById(req.params.id, function(err, foundPlaylist){
-    console.log(foundPlaylist);
+  Song.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, updatedSongs){
+    Playlist.findOne({ 'songs._id': req.params.id }, function(err, foundPlaylist){
+      foundPlaylist.songs.remove();
+      foundPlaylist.songs = updatedSongs;
+      foundPlaylist.save(function(err, savedPlaylist){
+        User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
+          foundUser.playlists.id(savedPlaylist.id).remove();
+          foundUser.playlists.push(savedPlaylist);
+          foundUser.save(function(err, savedUser){
+            res.redirect('/playlists/' + savedPlaylist.id);
+          });
+        });
+      });
+    });
   });
 });
 

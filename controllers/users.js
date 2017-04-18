@@ -74,6 +74,11 @@ router.delete('/:id', function(req, res){
         }
       },
       function(err, removedPlaylists){
+        Song.remove({
+          _id: {
+            $in: removedPlaylists.songs.id
+          }
+        })
         res.redirect('/users');
       }
     );
