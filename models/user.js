@@ -14,7 +14,6 @@ var userSchema = Schema({
   description: { type: String },
   playlists: [Playlist.schema],
   likedPlaylists: [Playlist.schema],
-  likedSongs: [Song.schema],
   profileComments: [Comments.schema]
 });
 
