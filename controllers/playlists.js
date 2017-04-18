@@ -18,11 +18,15 @@ router.get('/', function(req, res){
 
 // create new playlist page
 router.get('/new', function(req, res){
-  User.find({}, function(err, foundUsers){
-    res.render('playlists/playlists-new.ejs', {
-      users: foundUsers
+  if(req.session.currentUser){
+    User.find({}, function(err, foundUsers){
+      res.render('playlists/playlists-new.ejs', {
+        users: foundUsers
+      });
     });
-  });
+  } else {
+      res.send('only members can create playlists, come join us!');
+  }
 });
 
 // add songs to playlist page
@@ -35,9 +39,13 @@ router.get('/:id/add-songs', function(req, res){
 // edit playlist page
 router.get('/:id/edit', function(req, res){
   Playlist.findById(req.params.id, function(err, foundPlaylist){
-    res.render('playlists/playlists-edit.ejs', {
-      playlist: foundPlaylist
-    });
+    if(req.session.currentUser.username === foundPlaylist.creator) {
+      res.render('playlists/playlists-edit.ejs', {
+        playlist: foundPlaylist
+      });
+    } else {
+        res.send('this isn\'t your playlist!');
+    }
   });
 });
 
@@ -56,7 +64,8 @@ router.get('/:id', function(req, res){
     User.findOne({ 'username': foundPlaylist.creator }, function(err, foundUser){
       res.render('playlists/playlists-show.ejs', {
         playlist: foundPlaylist,
-        user: foundUser
+        user: foundUser,
+        currentUser: req.session.currentUser
       });
     });
   });
