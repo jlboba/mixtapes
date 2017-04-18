@@ -75,8 +75,10 @@ router.put('/:id', function(req, res){
 router.delete('/:id', function(req, res){
   User.findByIdAndRemove(req.params.id, function(err, deletedUser){
     var playlistIds = [];
+    var songIds = [];
     for(var i = 0; i < deletedUser.playlists.length; i++){
       playlistIds.push(deletedUser.playlists[i]._id);
+      songIds.push(deletedUser.playlists[i].songs._id);
     };
     Playlist.remove(
       {
@@ -87,10 +89,12 @@ router.delete('/:id', function(req, res){
       function(err, removedPlaylists){
         Song.remove({
           _id: {
-            $in: removedPlaylists.songs.id
+            $in: songIds
           }
-        })
-        return res.redirect('/users');
+        },
+        function(err, removedSongs){
+          res.redirect('/users');
+        });
       }
     );
   });
