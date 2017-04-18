@@ -2,7 +2,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var expressSession = require('express-session');
+var session = require('express-session');
 var methodOverride = require('method-override');
 var app = express();
 
@@ -11,7 +11,7 @@ var port = process.env.PORT || 3000;
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mixtapes';
 
 // ===================== MIDDLEWARE =====================
-app.use(expressSession({
+app.use(session({
   secret: "aprilone",
   resave: false,
   saveUninitialized: false // if nothing's been saved, don't save it
@@ -29,11 +29,15 @@ var playlistController = require('./controllers/playlists.js');
 app.use('/playlists', playlistController);
 
 // session
+var sessionsController = require('./controllers/sessions.js');
+app.use('/sessions', sessionsController);
 
 // ====================== GET ROUTES ====================
 // main index route
 app.get('/', function(req, res){
-  res.render('index.ejs');
+  res.render('index.ejs', {
+    currentUser: req.session.currentUser
+  });
 });
 
 // 404 - if page cannot be found, render the 404 page

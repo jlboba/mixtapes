@@ -5,6 +5,14 @@
     <title></title>
   </head>
   <body>
-    <a href="/playlists">playlists</a> // <a href="/users">users</a>
+    <% if(currentUser) {%>
+      <a href="/playlists">playlists</a> // <a href="/users">users</a><br />
+      <form action="/sessions?_method=DELETE" method="POST">
+        <input type="submit" value="logout" />
+      </form>
+    <% } %>
+    <% if(!currentUser) {%>
+      <a href="/sessions/new">log in</a> // <a href="/users/new">register</a>
+    <% } %>
   </body>
 </html>
