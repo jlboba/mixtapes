@@ -7,7 +7,6 @@
   <body>
     <h1>editing <%=user.username%></h1>
     <form action="/users/<%=user.id%>?_method=PUT" method="POST">
-      <input type="text" name="username" value="<%=user.username%>" placeholder="username">
       <input type="password" name="password" placeholder="password" />
       <input type="text" name="displayName" value="<%=user.displayName%>" placeholder="display name">
       <input type="text" name="icon" value="<%=user.icon%>" placeholder="icon url">

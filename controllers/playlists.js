@@ -62,6 +62,7 @@ router.get('/:id', function(req, res){
   });
 });
 
+
 // ====================== ACTION ROUTES =================
 // create a playlist
 router.post('/', function(req, res){
@@ -94,7 +95,7 @@ router.delete('/:id', function(req, res){
       foundUser.playlists.id(req.params.id).remove();
       foundUser.save(function(err, savedUser){
         Song.findByIdAndRemove(deletedPlaylist.songs._id, function(err, foundSongs){
-          res.redirect('/playlists');
+           res.redirect('/playlists');
         });
       });
     });
