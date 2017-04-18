@@ -19,14 +19,19 @@ router.get('/', function(req, res){
 
 // create new user page
 router.get('/new', function(req, res){
-  res.render('users/users-new.ejs');
+  if(!req.session.currentUser) {
+    return res.render('users/users-new.ejs');
+  } else {
+      return res.send('you already have an account! log out to create a new one');
+  }
 });
 
 // show user page
 router.get('/:id', function(req, res){
   User.findById(req.params.id, function(err, foundUser){
     res.render('users/users-show.ejs', {
-      user: foundUser
+      user: foundUser,
+      currentUser: req.session.currentUser
     });
   });
 });
@@ -34,9 +39,13 @@ router.get('/:id', function(req, res){
 // edit user page
 router.get('/:id/edit', function(req, res){
   User.findById(req.params.id, function(err, foundUser){
-    res.render('users/users-edit.ejs', {
-      user: foundUser
-    });
+    if(req.session.currentUser.username === foundUser.username){
+      return res.render('users/users-edit.ejs', {
+        user: foundUser
+      });
+    } else {
+        return res.send('this isn\'t your account silly!');
+    }
   });
 });
 
@@ -81,7 +90,7 @@ router.delete('/:id', function(req, res){
             $in: removedPlaylists.songs.id
           }
         })
-        res.redirect('/users');
+        return res.redirect('/users');
       }
     );
   });

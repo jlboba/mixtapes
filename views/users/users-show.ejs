@@ -18,9 +18,11 @@
           </li>
       <% } %>
     </ul>
-    <a href="/users/<%=user.id%>/edit">edit account</a>
-    <form action="/users/<%=user.id%>?_method=DELETE" method="POST">
-      <input type="submit" value="delete account" />
-    </form>
+    <% if(currentUser.username === user.username) {%>
+      <a href="/users/<%=user.id%>/edit">edit account</a>
+      <form action="/users/<%=user.id%>?_method=DELETE" method="POST">
+        <input type="submit" value="delete account" />
+      </form>
+    <% } %>
   </body>
 </html>
