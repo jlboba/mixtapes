@@ -18,6 +18,16 @@
           </li>
       <% } %>
     </ul>
+    <% if(user.likedPlaylists.length > 0){ %>
+      <h2><%=user.displayName%>'s liked playlists</h2>
+      <ul>
+        <% for(var i = 0; i < user.likedPlaylists.length; i++) { %>
+          <li>
+            <a href="/playlists/<%=user.likedPlaylists[i].id%>"><%=user.likedPlaylists[i].title%></a> by <%=user.likedPlaylists[i].creator%></a>
+          </li>
+        <% } %>
+      </ul>
+    <% } %>
     <% if(currentUser) {%>
       <% if(currentUser.username === user.username) {%>
         <a href="/users/<%=user.id%>/edit">edit account</a>

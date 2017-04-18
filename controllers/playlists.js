@@ -144,6 +144,22 @@ router.put('/edit-songs/:id', function(req, res){
   });
 });
 
+// liking a playlist
+router.put('/like/:id', function(req, res){
+  if(req.session.currentUser){
+    Playlist.findByIdAndUpdate(req.params.id, { $inc: { 'likes': +1 } }, { new: true }, function(err, updatedPlaylist){
+      User.findOne({ 'username': req.session.currentUser.username }, function(err, foundUser){
+        foundUser.likedPlaylists.push(updatedPlaylist);
+        foundUser.save(function(err, savedUser){
+          return res.redirect('/playlists/' + updatedPlaylist.id);
+        })
+      });
+    });
+  } else {
+      return res.send('you need to log in to like a playlist!');
+  }
+});
+
 // ==================== SEEDS ===========================
 var ghibliSeed = {
   title: ['One Summer\'s Day', 'My Neighbor Totoro', 'A Town With an Ocean View', 'Ponyo on the Cliff', 'Howl\'s Moving Castle Theme'],
