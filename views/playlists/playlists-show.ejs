@@ -22,7 +22,21 @@
           </li>
       <% } %>
     </ul>
+    <h2>COMMENTS</h2>
+    <ul>
+      <% for(var i = 0; i < playlist.comments.length; i++){ %>
+          <li>
+            <%=playlist.comments[i].author%> said: <%=playlist.comments[i].body%>
+          </li>
+      <% } %>
+    </ul>
     <% if(currentUser) {%>
+      <h2>LEAVE A COMMENT!</h2>
+      <form action="/playlists/comment/<%=playlist.id%>" method="POST">
+        <img src="<%=currentUser.icon%>" style="width: 100px; height: 100px;"> <small><%=currentUser.username%></small>
+        <textarea name="body" placeholder="comment"></textarea>
+        <input type="submit" value="submit" />
+      </form>
       <% if(currentUser.username === playlist.creator) { %>
         <a href="/playlists/<%=playlist.id%>/edit">EDIT</a>
         <form action="/playlists/<%=playlist.id%>?_method=DELETE" method="POST">

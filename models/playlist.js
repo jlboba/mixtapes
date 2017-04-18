@@ -12,7 +12,7 @@ var playlistSchema = Schema({
   description: { type: String },
   songs: Song.schema,
   likes: { type: Number },
-  comments: Comments.schema,
+  comments: [Comments.schema],
   privOrPub: Boolean
 });
 
