@@ -75,6 +75,7 @@ router.get('/:id', function(req, res){
 // ====================== ACTION ROUTES =================
 // create a playlist
 router.post('/', function(req, res){
+  req.body.creator = req.session.currentUser.username;
   Playlist.create(req.body, function(err, createdPlaylist){
     res.redirect('/playlists/' + createdPlaylist.id + '/add-songs');
   });
