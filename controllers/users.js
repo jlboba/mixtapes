@@ -93,7 +93,9 @@ router.delete('/:id', function(req, res){
           }
         },
         function(err, removedSongs){
-          res.redirect('/users');
+          req.session.destroy(function(){
+            res.redirect('/');
+          });
         });
       }
     );
