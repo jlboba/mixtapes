@@ -17,6 +17,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false // if nothing's been saved, don't save it
 }));
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.session.currentuser;
+  next();
+});
 // body parser
 app.use(bodyParser.urlencoded({extended:false}));
 // method override

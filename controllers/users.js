@@ -52,7 +52,9 @@ router.get('/:id/edit', function(req, res){
 // ====================== ACTION ROUTES =================
 // create an account
 router.post('/', function(req, res){
-  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)); // encrypt the password
+  if(req.body.password !== "") {
+    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)); // encrypt the password
+  }
   if(req.body.icon === ""){ // if the user didn't put an icon
     req.body.icon = undefined; // set the value to undefined so that in the schema it will use the default value
   };

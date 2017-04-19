@@ -2,16 +2,32 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>REGISTER | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
-  <body>
-    <form action="/users" method="POST">
-      <input type="text" name="username" placeholder="username" />
-      <input type="text" name="password" placeholder="password" />
-      <input type="text" name="displayName" placeholder="display name" />
-      <input type="text" name="icon" placeholder="icon" />
-      <input type="text" name="description" placeholder="description" />
-      <input type="submit" value="create" />
-    </form>
+  <body class="vinyl-bg-reg">
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="register-form">
+        <h1><strong>JOIN</strong> NOW TO SHARE GREAT MUSIC</h1>
+        <form action="/users" method="POST" class="register">
+          <h3>ACCOUNT</h3>
+          <p>
+            <em>* Required fields</em>
+          </p>
+          <input type="text" name="username" placeholder="username *" id="reg-username"/>
+          <input type="password" name="password" placeholder="password *" id="reg-password"/>
+          <p class="reg-error-message">
+          </p>
+          <h3>PROFILE</h3>
+          <input type="text" name="displayName" placeholder="display name" />
+          <input type="text" name="icon" placeholder="icon url" /><br />
+          <textarea name="description" placeholder="description" /></textarea>
+          <p>
+            <a class="register-button">CREATE</a>
+          </p>
+        </form>
+    </section>
+    </main>
   </body>
 </html>

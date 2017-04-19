@@ -2,38 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <!-- FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" />
-    <!-- STYLESHEETS -->
-    <!-- personal stylesheet -->
-    <link rel="stylesheet" href="/css/main.css" />
-    <!-- JQUERY -->
-    <!-- SCRIPTS -->
+    <title>MIXTAPES</title>
+    <% include ./partials/scripts.ejs %>
   </head>
-  <body class="landing-page">
-    <header>
-      <div class="site-title">
-        <h3><a href="/"><strong>MIX</strong>TAPES</a></h3>
-      </div>
-      <div class="site-nav">
-        <ul>
-          <li>
-            <a href="/playlists">PLAYLISTS</a>
-          </li>
-          <li>
-            <% if(currentUser) {%>
-              <form action="/sessions?_method=DELETE" method="POST" class="logout-button">
-                <input type="submit" value="LOGOUT" />
-              </form>
-            <% } %>
-            <% if(!currentUser) {%>
-              <a href="/sessions/new">LOGIN</a>
-            <% } %>
-          </li>
-        </ul>
-      </div>
-    </header>
+  <body class="vinyl-bg">
+    <% include ./partials/nav.ejs %>
     <main>
       <div class="site-intro">
         <h1><strong>MUSIC</strong> EXPRESSES THAT WHICH CANNOT BE SAID</h1>
@@ -42,7 +15,7 @@
           <a class="intro-button" href="/users/new">JOIN US</a>
         <% } %>
         <% if(currentUser){ %>
-          <a class="intro-button" href="/users/new">CREATE A PLAYLIST</a>
+          <a class="intro-button" href="/playlists/new">CREATE A PLAYLIST</a>
         <% } %>
       </div>
     </main>

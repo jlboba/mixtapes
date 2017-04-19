@@ -38,32 +38,41 @@ header {
   display: inline-block;
   padding: 0 20px 0 0;
 }
-.site-nav a, .logout-button input {
+.site-nav a {
   font-size: 16px;
   color: #888;
   font-weight: 700;
   text-decoration: none;
   padding-bottom: 2px;
-  border-bottom: 3px solid transparent;
-  transition: 0.5s;
-  -moz-transition: 0.5s;
-  -webkit-transition: 0.5s;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
 }
-.site-nav a:hover, .logout-button input:hover {
-  border-bottom: 3px solid mediumaquamarine;
-  cursor: pointer;
-  transition: 0.5s;
-  -moz-transition: 0.5s;
-  -webkit-transition: 0.5s;
-}
-.logout-button input {
-  border-top: 0px solid transparent;
-  border-right: 0px solid transparent;
-  border-left: 0px solid transparent;
+.site-nav a:after {
+  content:'';
+  display: block;
+  height: 3px;
+  width: 0;
   background: transparent;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+.site-nav a:hover:after {
+  width: 100%;
+  background: rgb(102, 221, 170);
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+.site-nav a:hover {
+  cursor: pointer;
+  transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
 }
 /* LANDING PAGE */
-.landing-page {
+.vinyl-bg {
   background: url('/imgs/vinyl.png') #f9f9f9;
   background-size: 50vh;
   background-position: 100% -100%;
@@ -73,14 +82,14 @@ header {
   width: 70%;
   margin-left: 5%;
 }
-.site-intro h1 {
+.site-intro h1, .register-form h1 {
   font-size: 6.5vw;
   letter-spacing: -2px;
   padding: 0;
   margin: 10px 0;
 }
-.site-intro h1 strong {
-  color: mediumaquamarine;
+.site-intro h1 strong, .register-form h1 strong {
+  color: rgb(102, 221, 170);
 }
 .site-intro h2 {
   font-size: 2.2vw;
@@ -91,7 +100,7 @@ header {
   padding: 0;
   margin: 10px 0;
 }
-.intro-button {
+.intro-button, .register-button {
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -104,10 +113,10 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:before {
+.intro-button:before, .register-button:before {
   content: "";
   position: absolute;
-  background: mediumaquamarine;
+  background: rgb(102, 221, 170);
   bottom: 0;
   left: 0;
   right: 100%;
@@ -117,23 +126,24 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:hover {
+.intro-button:hover, .register-button:hover {
   color: whitesmoke;
-  border: 1px solid mediumaquamarine;
+  border: 1px solid rgb(102, 221, 170);
+  cursor: pointer;
 }
-.intro-button:hover:before {
+.intro-button:hover:before, .register-button:hover:before {
   right: 0;
 }
 
 @media (max-width: 775px) {
-  .landing-page {
+  .vinyl-bg {
     background-size: 40vh;
     background-position: 100% -120%;
   }
 }
 
 @media (max-width: 700px){
-  .landing-page {
+  .vinyl-bg {
     background: #f9f9f9;
   }
   .site-intro {
@@ -148,4 +158,62 @@ header {
     width: 95%;
     font-size: 4vw;
   }
+}
+/* REGISTER PAGE */
+.vinyl-bg-reg {
+  background: url('/imgs/vinyl.png') #f9f9f9;
+  background-size: 50vh;
+  background-position: 100% -300%;
+  background-repeat: no-repeat;
+}
+.register-form {
+  width: 70%;
+  margin-left: 5%;
+  margin-top: -6%;
+}
+.register-form h3 {
+  padding: 0;
+  font-size: 2.5vw;
+}
+.register-form h3:first-of-type {
+  margin: 0;
+}
+.register-form h3:nth-of-type(2) {
+  margin: 10px 0;
+}
+.register-form p {
+  margin: 0 0 10px 0;
+}
+.register-form p:nth-of-type(3) {
+  margin: 20px 0;
+}
+.register-form em {
+  color: #888;
+  text-transform: uppercase;
+  font-size: 1.2vw;
+}
+.reg-error-message {
+  
+}
+.register-form input, .register-form textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+.register-form textarea {
+  margin-top: 3px;
+  width: 31.5%;
+  height: 7vh;
+}
+.register-form input[placeholder], .register-form textarea[placeholder]{
+  text-transform: uppercase;
+}
+.register-form input[type="text"]:focus,
+.register-form input[type="password"]:focus,
+.register-form textarea:focus{
+  border: 1px solid rgb(102, 221, 170);
+  outline: none;
+}
+.register-form .form-validate {
+  border: 1px solid rgb(239, 103, 93);
 }
