@@ -192,9 +192,6 @@ header {
   text-transform: uppercase;
   font-size: 1.2vw;
 }
-.reg-error-message {
-  
-}
 .register-form input, .register-form textarea {
   padding: 10px;
   border-radius: 5px;
@@ -216,4 +213,28 @@ header {
 }
 .register-form .form-validate {
   border: 1px solid rgb(239, 103, 93);
+}
+@media (max-width: 775px) {
+  .vinyl-bg-reg {
+    background-size: 40vh;
+    background-position: 100% -740%;
+  }
+}
+@media (max-width: 700px){
+  .vinyl-bg-reg {
+    background: #f9f9f9;
+  }
+  .register-form {
+    width: 90%;
+    text-align: center;
+  }
+  .register-form h1 {
+    font-size: 8vw;
+  }
+  .register-form h3 {
+    font-size: 4vw;
+  }
+  .register-form em {
+    font-size: 2vw;
+  }
 }
