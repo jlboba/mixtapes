@@ -163,13 +163,22 @@ router.put('/like/:id', function(req, res){
 // commenting on a playlist
 router.post('/comment/:id', function(req, res){
   if(req.session.currentUser){
-    req.body.author = req.session.currentUser.username;
+    req.body.author = req.session.currentUser.displayName;
   };
   Comments.create(req.body, function(err, createdComment){
     Playlist.findById(req.params.id, function(err, foundPlaylist){
       foundPlaylist.comments.push(createdComment);
       foundPlaylist.save(function(err, savedPlaylist){
-        res.redirect('/playlists/' + req.params.id);
+        if(req.session.currentUser){
+          User.findOne({ 'username': req.session.currentUser.username }, function(err, foundUser){
+            foundUser.comments.push(createdComment);
+            foundUser.save(function(err, savedUser){
+              return res.redirect('/playlists/' + req.params.id);
+            });
+          });
+        } else {
+          res.redirect('/playlists/' + req.params.id);
+        }
       });
     });
   });

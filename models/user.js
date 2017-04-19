@@ -14,7 +14,7 @@ var userSchema = Schema({
   description: { type: String },
   playlists: [Playlist.schema],
   likedPlaylists: [Playlist.schema],
-  profileComments: [Comments.schema]
+  comments: [Comments.schema]
 });
 
 var User = mongoose.model('User', userSchema);

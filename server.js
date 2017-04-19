@@ -11,13 +11,18 @@ var port = process.env.PORT || 3000;
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mixtapes';
 
 // ===================== MIDDLEWARE =====================
+// sessions
 app.use(session({
   secret: "aprilone",
   resave: false,
   saveUninitialized: false // if nothing's been saved, don't save it
 }));
+// body parser
 app.use(bodyParser.urlencoded({extended:false}));
+// method override
 app.use(methodOverride('_method'));
+// static files
+app.use(express.static('public'));
 
 // ==================== CONTROLLERS =====================
 // user

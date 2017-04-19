@@ -3,16 +3,48 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" />
+    <!-- STYLESHEETS -->
+    <!-- personal stylesheet -->
+    <link rel="stylesheet" href="/css/main.css" />
+    <!-- JQUERY -->
+    <!-- SCRIPTS -->
   </head>
   <body>
-    <% if(currentUser) {%>
-      <a href="/playlists">playlists</a> // <a href="/users">users</a><br />
-      <form action="/sessions?_method=DELETE" method="POST">
-        <input type="submit" value="logout" />
-      </form>
-    <% } %>
-    <% if(!currentUser) {%>
-      <a href="/sessions/new">log in</a> // <a href="/users/new">register</a>
-    <% } %>
+    <header>
+      <div class="site-title">
+        <h3><a href="/"><strong>MIX</strong>TAPES</a></h3>
+      </div>
+      <div class="site-nav">
+        <ul>
+          <li>
+            <a href="/playlists">PLAYLISTS</a>
+          </li>
+          <li>
+            <% if(currentUser) {%>
+              <form action="/sessions?_method=DELETE" method="POST" class="logout-button">
+                <input type="submit" value="LOGOUT" />
+              </form>
+            <% } %>
+            <% if(!currentUser) {%>
+              <a href="/sessions/new">LOGIN</a>
+            <% } %>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <div class="site-intro">
+        <h1><strong>MUSIC</strong> EXPRESSES THAT WHICH CANNOT BE SAID</h1>
+        <h2>DISCOVER AND CREATE PLAYLISTS TO EXPRESS HOW YOU FEEL</h2><br />
+        <% if(!currentUser){ %>
+          <a class="intro-button" href="/users/new">JOIN US</a>
+        <% } %>
+        <% if(currentUser){ %>
+          <a class="intro-button" href="/users/new">CREATE A PLAYLIST</a>
+        <% } %>
+      </div>
+    </main>
   </body>
 </html>

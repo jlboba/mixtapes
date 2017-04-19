@@ -1,0 +1,102 @@
+/* GENERAL STYLING */
+* {
+  font-family: 'Karla', helvetica;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+}
+a {
+  text-decoration: none;
+}
+/* HEADER/NAV BAR STYLING */
+header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  height: 70px;
+  margin-bottom: 7%;
+}
+.site-title h3 {
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-left: 20%;
+  font-size: 26px;
+}
+.site-title a {
+  color: black;
+}
+.site-nav {
+  margin-top: 9px;
+  margin-right: 5%;
+}
+.site-nav ul {
+  list-style-type: none;
+}
+.site-nav li {
+  display: inline-block;
+  padding: 0 20px 0 0;
+}
+.site-nav a, .logout-button input {
+  font-size: 16px;
+  color: #888;
+  font-weight: 700;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 3px solid transparent;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.site-nav a:hover, .logout-button input:hover {
+  border-bottom: 3px solid mediumaquamarine;
+  cursor: pointer;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.logout-button input {
+  border-top: 0px solid transparent;
+  border-right: 0px solid transparent;
+  border-left: 0px solid transparent;
+  background: transparent;
+}
+/* LANDING PAGE */
+.site-intro {
+  width: 70%;
+  margin-left: 5%;
+}
+.site-intro h1 {
+  font-size: 6.5vw;
+  padding: 0;
+  margin: 10px 0;
+}
+.site-intro h1 strong {
+  color: mediumaquamarine;
+}
+.site-intro h2 {
+  font-size: 2.3vw;
+  font-style: italic;
+  font-weight: 400;
+  color: #888;
+  padding: 0;
+  margin: 10px 0;
+}
+.intro-button {
+  font-size: 20px;
+  color: white;
+  background: mediumaquamarine;
+  border-radius: 8px;
+  padding: 10px;
+  border: transparent;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.intro-button:hover {
+  background: #888;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
