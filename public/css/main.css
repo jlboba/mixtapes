@@ -63,12 +63,19 @@ header {
   background: transparent;
 }
 /* LANDING PAGE */
+.landing-page {
+  background: url('/imgs/vinyl.png') #f9f9f9;
+  background-size: 50vh;
+  background-position: 100% -100%;
+  background-repeat: no-repeat;
+}
 .site-intro {
   width: 70%;
   margin-left: 5%;
 }
 .site-intro h1 {
   font-size: 6.5vw;
+  letter-spacing: -2px;
   padding: 0;
   margin: 10px 0;
 }
@@ -76,7 +83,8 @@ header {
   color: mediumaquamarine;
 }
 .site-intro h2 {
-  font-size: 2.3vw;
+  font-size: 2.2vw;
+  letter-spacing: -1px;
   font-style: italic;
   font-weight: 400;
   color: #888;
@@ -85,18 +93,59 @@ header {
 }
 .intro-button {
   font-size: 20px;
-  color: white;
-  background: mediumaquamarine;
-  border-radius: 8px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  border: 1px solid #555;
   padding: 10px;
-  border: transparent;
-  transition: 0.5s;
-  -moz-transition: 0.5s;
-  -webkit-transition: 0.5s;
+  color: #444;
+  border-radius: 5px;
+  position: relative;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+}
+.intro-button:before {
+  content: "";
+  position: absolute;
+  background: mediumaquamarine;
+  bottom: 0;
+  left: 0;
+  right: 100%;
+  top: 0;
+  z-index: -1;
+  transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
 }
 .intro-button:hover {
-  background: #888;
-  transition: 0.5s;
-  -moz-transition: 0.5s;
-  -webkit-transition: 0.5s;
+  color: whitesmoke;
+  border: 1px solid mediumaquamarine;
+}
+.intro-button:hover:before {
+  right: 0;
+}
+
+@media (max-width: 775px) {
+  .landing-page {
+    background-size: 40vh;
+    background-position: 100% -120%;
+  }
+}
+
+@media (max-width: 700px){
+  .landing-page {
+    background: #f9f9f9;
+  }
+  .site-intro {
+    width: 100%;
+  }
+  .site-intro h1 {
+    width: 95%;
+    font-size: 10vw;
+    letter-spacing: -2px;
+  }
+  .site-intro h2 {
+    width: 95%;
+    font-size: 4vw;
+  }
 }
