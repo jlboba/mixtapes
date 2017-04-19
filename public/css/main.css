@@ -82,13 +82,13 @@ header {
   width: 70%;
   margin-left: 5%;
 }
-.site-intro h1, .register-form h1 {
+.site-intro h1, .register-form h1, .login-form h1 {
   font-size: 6.5vw;
   letter-spacing: -2px;
   padding: 0;
   margin: 10px 0;
 }
-.site-intro h1 strong, .register-form h1 strong {
+.site-intro h1 strong, .register-form h1 strong, .login-form h1 strong {
   color: rgb(102, 221, 170);
 }
 .site-intro h2 {
@@ -100,7 +100,7 @@ header {
   padding: 0;
   margin: 10px 0;
 }
-.intro-button, .register-button {
+.intro-button, .register-button, .login-button {
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -113,7 +113,7 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:before, .register-button:before {
+.intro-button:before, .register-button:before, .login-button:before {
   content: "";
   position: absolute;
   background: rgb(102, 221, 170);
@@ -126,22 +126,20 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:hover, .register-button:hover {
+.intro-button:hover, .register-button:hover, .login-button:hover {
   color: whitesmoke;
   border: 1px solid rgb(102, 221, 170);
   cursor: pointer;
 }
-.intro-button:hover:before, .register-button:hover:before {
+.intro-button:hover:before, .register-button:hover:before, .login-button:hover:before {
   right: 0;
 }
-
 @media (max-width: 775px) {
   .vinyl-bg {
     background-size: 40vh;
     background-position: 100% -120%;
   }
 }
-
 @media (max-width: 700px){
   .vinyl-bg {
     background: #f9f9f9;
@@ -171,28 +169,28 @@ header {
   margin-left: 5%;
   margin-top: -6%;
 }
-.register-form h3 {
+.register-form h3, .login h3 {
   padding: 0;
   font-size: 2.5vw;
 }
-.register-form h3:first-of-type {
+.register-form h3:first-of-type{
   margin: 0;
 }
-.register-form h3:nth-of-type(2) {
+.register-form h3:nth-of-type(2), .login h3 {
   margin: 10px 0;
 }
-.register-form p {
+.register-form p, .login-form p {
   margin: 0 0 10px 0;
 }
-.register-form p:nth-of-type(3) {
+.register-form p:nth-of-type(3), .login-form p:nth-of-type(2) {
   margin: 20px 0;
 }
-.register-form em {
+.register-form em, .login-form em{
   color: #888;
   text-transform: uppercase;
   font-size: 1.2vw;
 }
-.register-form input, .register-form textarea {
+.register-form input, .register-form textarea, .login input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #eee;
@@ -202,16 +200,18 @@ header {
   width: 31.5%;
   height: 7vh;
 }
-.register-form input[placeholder], .register-form textarea[placeholder]{
+.register-form input[placeholder], .register-form textarea[placeholder], .login input[placeholder]{
   text-transform: uppercase;
 }
 .register-form input[type="text"]:focus,
 .register-form input[type="password"]:focus,
-.register-form textarea:focus{
+.register-form textarea:focus,
+.login input[type="text"]:focus,
+.login input[type="password"]:focus  {
   border: 1px solid rgb(102, 221, 170);
   outline: none;
 }
-.register-form .form-validate {
+.register-form .form-validate, .login-form .form-validate {
   border: 1px solid rgb(239, 103, 93);
 }
 @media (max-width: 775px) {
@@ -224,17 +224,38 @@ header {
   .vinyl-bg-reg {
     background: #f9f9f9;
   }
-  .register-form {
+  .register-form, .login-form {
     width: 90%;
     text-align: center;
   }
-  .register-form h1 {
+  .register-form h1, .login-form h1 {
     font-size: 8vw;
   }
-  .register-form h3 {
+  .register-form h3, .login-form h3 {
     font-size: 4vw;
   }
-  .register-form em {
+  .register-form em, .login-form em {
     font-size: 2vw;
+  }
+}
+/* LOGIN PAGE */
+.vinyl-bg-login {
+  background: url('/imgs/vinyl.png') #f9f9f9;
+  background-size: 50vh;
+  background-position: 100% -50%;
+  background-repeat: no-repeat;
+}
+.login-form {
+  margin-left: 5%;
+}
+@media (max-width: 775px) {
+  .vinyl-bg-login {
+    background-size: 40vh;
+    background-position: 100% -740%;
+  }
+}
+@media (max-width: 700px){
+  .vinyl-bg-login {
+    background: #f9f9f9;
   }
 }

@@ -2,13 +2,25 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>log in</title>
+    <title>REGISTER | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
-  <body>
-    <form action="/sessions" method="POST">
-      <input type="text" name="username" placeholder="username" />
-      <input type="password" name="password" placeholder="password" />
-      <input type="submit" value="login" />
-    </form>
+  <body class="vinyl-bg-login">
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="login-form">
+        <h1><strong>LOGIN</strong> TO MIXTAPES</h1>
+        <form action="/sessions" method="POST" class="login">
+          <h3>ACCOUNT</h3>
+          <input type="text" name="username" placeholder="username *" id="login-username"/>
+          <input type="password" name="password" placeholder="password *" id="login-password"/>
+          <p class="login-error-message">
+          </p>
+          <p>
+            <a class="login-button">LOGIN</a>
+          </p>
+        </form>
+      </section>
+    </main>
   </body>
 </html>

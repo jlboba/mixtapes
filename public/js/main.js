@@ -4,7 +4,10 @@ $(function(){ // start window onload
   $('.logout-button').on('click', submitButtons.logoutForm);
 
   // register
-  $('.register-button').on('click', submitButtons.registerValidate)
+  $('.register-button').on('click', submitButtons.registerValidate);
+
+  // login
+  $('.login-button').on('click', submitButtons.loginForm);
 }); // end window onload
 
 // ====== EVENT HANDLERS ========
@@ -40,6 +43,23 @@ var submitButtons = {
         $username.addClass('form-validate');
         $password.addClass('form-validate');
         $error.html('<em>please provide a username and password!</em>');
+    }
+  },
+  loginForm: function(){
+    var $username = $('#login-username');
+    var $password = $('#login-password');
+    var $error = $('.login-error-message');
+    if(($username.val() === '') && ($password.val() === '')){
+      $username.addClass('form-validate');        $password.addClass('form-validate');
+      $error.html('<em>please provide your username and password!</em>');
+    } else if($username.val() === ''){
+      $username.addClass('form-validate');
+      $error.html('<em>please provide your username!</em>');
+    } else if($password.val() === ''){
+        $password.addClass('form-validate');
+        $error.html('<em>please provide your password!</em>');
+    } else {
+        $('.login').submit();
     }
   }
 }

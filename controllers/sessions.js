@@ -12,11 +12,15 @@ router.get('/new', function(req, res){
 // ===================== ACTION ROUTES ==================
 router.post('/', function(req, res){
   User.findOne({'username': req.body.username}, function(err, foundUser){
-    if(bcrypt.compareSync(req.body.password, foundUser.password)){
-      req.session.currentUser = foundUser;
-      res.redirect('/');
+    if (foundUser !== null){
+      if(bcrypt.compareSync(req.body.password, foundUser.password)){
+        req.session.currentUser = foundUser;
+        res.redirect('/');
+      } else {
+          res.send('wrong password');
+      }
     } else {
-        res.send('wrong password');
+        res.send('incorrect user!');
     }
   });
 });
