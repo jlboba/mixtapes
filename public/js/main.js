@@ -12,6 +12,9 @@ $(function(){ // start window onload
   // edit user
   $('.user-edit-button').on('click', submitButtons.userEditForm);
 
+  // delete user
+  $('.user-delete-button').on('click', submitButtons.userDeleteForm);
+  
 }); // end window onload
 
 // ====== EVENT HANDLERS ========
@@ -75,5 +78,8 @@ var submitButtons = {
     } else {
       $('.user-edit').submit();
     }
+  },
+  userDeleteForm: function(){
+    $('.user-delete-form').submit();
   }
 }

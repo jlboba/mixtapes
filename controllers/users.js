@@ -62,7 +62,7 @@ router.post('/', function(req, res){
     req.body.displayName = req.body.username; // set it equal to their username
   };
   User.create(req.body, function(){
-    res.redirect('/users');
+    res.redirect('/sessions/new');
   });
 });
 

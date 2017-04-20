@@ -13,11 +13,12 @@ a {
 strong {
   color: rgb(102, 221, 170);
 }
-.site-intro h1, .register-form h1, .login-form h1, .users-index h1, .user-edit-form h1 {
+.site-intro h1, .register-form h1, .login-form h1, .users-index h1, .user-edit-form h1, .show-user h1 {
   font-size: 6.5vw;
   letter-spacing: -2px;
   padding: 0;
   margin: 10px 0;
+  text-transform: uppercase;
 }
 /* HEADER/NAV BAR STYLING */
 header {
@@ -287,6 +288,7 @@ header {
 }
 .user-card {
   width: 30%;
+  height: 8vw;
   background: #eee;
   padding: 10px;
   border-radius: 5px;
@@ -338,7 +340,15 @@ header {
   overflow: auto;
   box-sizing: border-box;
 }
+@media (max-width: 1084px) {
+  .user-card {
+    height: 11vw;
+  }
+}
 @media (max-width: 800px) {
+  .user-card {
+    height: 10vw;
+  }
   .user-card img {
     height: 60px;
     width: 60px;
@@ -373,4 +383,160 @@ header {
   .user-stats {
     width: 100%;
   }
+}
+/* SHOW USER PAGE */
+.show-user {
+  width: 75%;
+  margin: -4% auto 4% auto;
+}
+.show-user-info {
+  height: 23vw;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.show-user-icon {
+  width: 30%;
+}
+.show-user-icon img {
+  width: 100%;
+  height: auto;
+  border-radius: 100%;
+}
+.show-user-stats {
+  width: 60%;
+}
+.show-user-stats h1 {
+  margin: 0 0 -2% 0;
+}
+.show-user-stats em {
+  text-transform: uppercase;
+  font-size: 1.5vw;
+  color: #888;
+}
+.show-user-stats a {
+  color: rgb(102, 221, 170);
+  font-weight: 700;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.show-user-stats a:hover {
+  color: #888;
+  cursor: pointer;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.show-user-stats form {
+  display: inline-block;
+}
+.show-user-stats blockquote {
+  height: 9vw;
+  overflow: auto;
+  margin: 2% 0;
+  font-size: 1.7vw;
+  color: #444;
+}
+.show-user-playlists {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+}
+.show-user-playlists h2 {
+  font-size: 3vw;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 700;
+}
+.show-user-playlists h2:after {
+  content:'';
+  width: 15%;
+  height: 0.5vw;
+  background: #888;
+  display: block;
+  margin: 5px 0;
+}
+.show-user-playlists p {
+  margin-bottom: 20px;
+}
+.user-created-playlists,
+.user-liked-playlists {
+  width: 100%;
+  margin-top: 20px;
+}
+.user-created-playlists-row,
+.user-liked-playlists-row {
+  margin-top: 3%;
+  height: 16.6vw;
+  display: flex;
+  justify-content: space-between;
+}
+.user-created-playlists-card,
+.user-liked-playlists-card {
+  width: 23.5%;
+  height: 100%;
+}
+.user-created-playlists-card:hover .user-created-playlist-info,
+.user-liked-playlists-card:hover .user-liked-playlist-info {
+  opacity: 1;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.user-created-playlist-info,
+.user-liked-playlist-info {
+  opacity: 0;
+  width: 100%;
+  height: inherit;
+  float: left;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  box-sizing: border-box;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.user-created-playlist-info h4,
+.user-liked-playlist-info h4 {
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 2.2vw;
+  color: #444;
+}
+.user-created-playlist-info p,
+.user-liked-playlist-info p {
+  width: 50%;
+  height: 52%;
+  border-radius: 50%;
+  border: 1px solid rgb(102, 221, 170);
+  margin: 10% auto;
+  text-align: center;
+  font-size: 4vw;
+  padding-top: 8%;
+  box-sizing: border-box;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.user-created-playlist-info p i,
+.user-liked-playlist-info p i {
+  margin-left: 12%;
+}
+.user-created-playlist-info p a,
+.user-liked-playlist-info p a{
+  color: rgb(102, 221, 170);
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.user-created-playlist-info p a:hover,
+.user-liked-playlist-info p a:hover {
+  color: #888;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.user-liked-playlist-info em {
+  font-size: 1.3vw;
+  text-transform: uppercase;
 }

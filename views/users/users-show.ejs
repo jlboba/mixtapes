@@ -2,39 +2,96 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title><%=user.username.toUpperCase()%> | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
   <body>
-    <img src="<%=user.icon%>">
-    <h1><%=user.displayName%> (@<%=user.username%>)</h1>
-    <blockquote>
-      <%=user.description%>
-    </blockquote>
-    <h2><%=user.displayName%>'s playlists</h2>
-    <ul>
-      <% for(var i = 0; i < user.playlists.length; i++) {%>
-          <li>
-            <a href="/playlists/<%=user.playlists[i].id%>"><%=user.playlists[i].title%></a>
-          </li>
-      <% } %>
-    </ul>
-    <% if(user.likedPlaylists.length > 0){ %>
-      <h2><%=user.displayName%>'s liked playlists</h2>
-      <ul>
-        <% for(var i = 0; i < user.likedPlaylists.length; i++) { %>
-          <li>
-            <a href="/playlists/<%=user.likedPlaylists[i].id%>"><%=user.likedPlaylists[i].title%></a> by <%=user.likedPlaylists[i].creator%></a>
-          </li>
-        <% } %>
-      </ul>
-    <% } %>
-    <% if(currentUser) {%>
-      <% if(currentUser.username === user.username) {%>
-        <a href="/users/<%=user.id%>/edit">edit account</a>
-        <form action="/users/<%=user.id%>?_method=DELETE" method="POST">
-          <input type="submit" value="delete account" />
-        </form>
-      <% } %>
-    <% } %>
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="show-user">
+        <div class="show-user-info">
+          <div class="show-user-icon">
+            <img src="<%=user.icon%>">
+          </div>
+          <div class="show-user-stats">
+            <h1><%=user.displayName%></h1>
+            <em><%=user.playlists.length%> created playlists
+              <% if(user.likedPlaylists.length > 0){ %>
+                // <%=user.likedPlaylists.length%> liked playlists
+              <% } else { %>
+                  // 0 liked playlists
+              <% } %>
+            </em><br />
+            <em>@<%=user.username%></em>
+            <% if(currentUser){ %>
+              <% if(currentUser.username === user.username) {%>
+                <em>//
+                  <a href="/users/<%=user.id%>/edit">EDIT ACCOUNT</a> //
+                  <form action="/users/<%=user.id%>?_method=DELETE" method="POST" class="user-delete-form">
+                    <a class="user-delete-button">DELETE</a>
+                  </form>
+                </em>
+              <% } %>
+            <% } %>
+              <blockquote>
+                <%=user.description%>
+              </blockquote>
+          </div>
+        </div>
+        <div class="show-user-playlists">
+          <div class="user-created-playlists">
+            <h2><%=user.displayName%>'s playlists <strong>created</strong></h2>
+            <% if(user.playlists.length === 0){ %>
+                <p><em>NONE!</em></p>
+            <% } %>
+            <% for(var i = 0; i < user.playlists.length; i++) { %>
+                <% if(i % 4 === 0) { %>
+                    <% if(i !== 0) { %>
+                      </div>
+                    <% } %>
+                    <div class="user-created-playlists-row">
+                <% } %>
+                <div class="user-created-playlists-card" style="background:url('<%=user.playlists[i].coverImage%>');background-size: cover;background-position: center;">
+                  <div class="user-created-playlist-info">
+                    <h4><%=user.playlists[i].title%></h4>
+                    <p>
+                      <a href="/playlists/<%=user.playlists[i].id%>">
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                      </a>
+                    </p>
+                  </div>
+                </div>
+            <% } %>
+          </div>
+          <div class="user-liked-playlists">
+              <h2><%=user.displayName%>'s playlists <strong>liked</strong></h2>
+              <% if(user.likedPlaylists.length === 0){ %>
+                  <p><em>NONE!</em></p>
+              <% } %>
+              <% if(user.likedPlaylists.length > 0){ %>
+                <% for(var i = 0; i < user.likedPlaylists.length; i++) { %>
+                  <% if(i % 4 === 0) { %>
+                      <% if(i !== 0) { %>
+                        </div>
+                      <% } %>
+                      <div class="user-liked-playlists-row">
+                  <% } %>
+                  <div class="user-liked-playlists-card" style="background:url('<%=user.likedPlaylists[i].coverImage%>');background-size: cover;background-position: center;">
+                    <div class="user-liked-playlist-info">
+                      <h4><%=user.likedPlaylists[i].title%></h4>
+                      <em>BY: <%=user.likedPlaylists[i].creator%></em>
+                      <p>
+                        <a href="/playlists/<%=user.likedPlaylists[i].id%>">
+                          <i class="fa fa-play" aria-hidden="true"></i>
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                <% } %>
+            <% } %>
+          </div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
