@@ -1,5 +1,6 @@
 $(function(){ // start window onload
   // ======= EVENT LISTENERS =========
+  // -------- users
   // logout
   $('.logout-button').on('click', submitButtons.logoutForm);
 
@@ -14,6 +15,10 @@ $(function(){ // start window onload
 
   // delete user
   $('.user-delete-button').on('click', submitButtons.userDeleteForm);
+
+  // ------ playlists
+  // create playlist
+  $('.new-playlist-button').on('click', submitButtons.newPlaylistForm);
 
   // ===== ISOTOPE METAFIZZY (isotope.metafizzy.co) =======
   // initialize isotope
@@ -104,5 +109,15 @@ var submitButtons = {
   },
   userDeleteForm: function(){
     $('.user-delete-form').submit();
+  },
+  newPlaylistForm: function(){
+    var $title = $('#new-playlist-title');
+    var $error = $('.new-playlist-error-message');
+    if($title.val() === ''){
+      $title.addClass('form-validate');
+      $error.html('<em>please provide a title for the playlist!');
+    } else {
+      $('.new-playlist').submit();
+    }
   }
 }

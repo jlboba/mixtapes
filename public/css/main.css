@@ -13,7 +13,7 @@ a {
 strong {
   color: rgb(102, 221, 170);
 }
-.site-intro h1, .register-form h1, .login-form h1, .users-index h1, .user-edit-form h1, .show-user h1, .playlists-index h1 {
+.site-intro h1, .register-form h1, .login-form h1, .users-index h1, .user-edit-form h1, .show-user h1, .playlists-index h1, .new-playlist-form h1 {
   font-size: 6.5vw;
   letter-spacing: -2px;
   padding: 0;
@@ -102,7 +102,7 @@ header {
   padding: 0;
   margin: 10px 0;
 }
-.intro-button, .register-button, .login-button, .user-edit-button {
+.intro-button, .register-button, .login-button, .user-edit-button, .new-playlist-button {
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -115,7 +115,7 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:before, .register-button:before, .login-button:before, .user-edit-button:before {
+.intro-button:before, .register-button:before, .login-button:before, .user-edit-button:before, .new-playlist-button:before {
   content: "";
   position: absolute;
   background: rgb(102, 221, 170);
@@ -128,12 +128,12 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:hover, .register-button:hover, .login-button:hover, .user-edit-button:hover {
+.intro-button:hover, .register-button:hover, .login-button:hover, .user-edit-button:hover, .new-playlist-button:hover {
   color: whitesmoke;
   border: 1px solid rgb(102, 221, 170);
   cursor: pointer;
 }
-.intro-button:hover:before, .register-button:hover:before, .login-button:hover:before, .user-edit-button:hover:before {
+.intro-button:hover:before, .register-button:hover:before, .login-button:hover:before, .user-edit-button:hover:before, .new-playlist-button:hover:before {
   right: 0;
 }
 @media (max-width: 775px) {
@@ -171,28 +171,28 @@ header {
   margin-left: 5%;
   margin-top: -6%;
 }
-.register-form h3, .login h3, .user-edit-form h3 {
+.register-form h3, .login h3, .user-edit-form h3, .new-playlist h3 {
   padding: 0;
   font-size: 2.5vw;
 }
 .register-form h3:first-of-type, .user-edit-form h3:first-of-type {
   margin: 0;
 }
-.register-form h3:nth-of-type(2), .login h3, .user-edit-form h3:nth-of-type(2) {
+.register-form h3:nth-of-type(2), .login h3, .user-edit-form h3:nth-of-type(2){
   margin: 10px 0;
 }
 .register-form p, .login-form p, .user-edit-form p {
   margin: 0 0 10px 0;
 }
-.register-form p:nth-of-type(3), .login-form p:nth-of-type(2), .user-edit-form p:nth-of-type(3) {
+.register-form p:nth-of-type(3), .login-form p:nth-of-type(2), .user-edit-form p:nth-of-type(3), .new-playlist-form p:nth-of-type(2) {
   margin: 20px 0;
 }
-.register-form em, .login-form em, .user-edit-form em{
+.register-form em, .login-form em, .user-edit-form em, .new-playlist-form em, .new-playlist-form span{
   color: #888;
   text-transform: uppercase;
   font-size: 1.2vw;
 }
-.register-form input, .register-form textarea, .login input, .user-edit-form input, .user-edit-form textarea {
+.register-form input, .register-form textarea, .login input, .user-edit-form input, .user-edit-form textarea, .new-playlist input, .new-playlist textarea{
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #eee;
@@ -202,7 +202,7 @@ header {
   width: 31.5%;
   height: 7vh;
 }
-.register-form input[placeholder], .register-form textarea[placeholder], .login input[placeholder], .user-edit-form input[placeholder]{
+.register-form input[placeholder], .register-form textarea[placeholder], .login input[placeholder], .user-edit-form input[placeholder], .new-playlist input[placeholder], .new-playlist textarea[placeholder]{
   text-transform: uppercase;
 }
 .register-form input[type="text"]:focus,
@@ -212,11 +212,14 @@ header {
 .login input[type="password"]:focus,
 .user-edit-form input[type="text"]:focus,
 .user-edit-form input[type="password"]:focus,
-.user-edit-form textarea:focus  {
+.user-edit-form textarea:focus,
+.new-playlist-form input[type="text"]:focus,
+.new-playlist-form input[type="password"]:focus,
+.new-playlist-form textarea:focus {
   border: 1px solid rgb(102, 221, 170);
   outline: none;
 }
-.register-form .form-validate, .login-form .form-validate, .user-edit-form .form-validate {
+.register-form .form-validate, .login-form .form-validate, .user-edit-form .form-validate, .new-playlist-form .form-validate {
   border: 1px solid rgb(239, 103, 93);
 }
 @media (max-width: 775px) {
@@ -229,17 +232,17 @@ header {
   .vinyl-bg-reg {
     background: #f9f9f9;
   }
-  .register-form, .login-form, .user-edit-form {
+  .register-form, .login-form, .user-edit-form, .new-playlist-form {
     width: 90%;
     text-align: center;
   }
-  .register-form h1, .login-form h1, .user-edit-form h1 {
+  .register-form h1, .login-form h1, .user-edit-form h1, .new-playlist-form h1 {
     font-size: 8vw;
   }
-  .register-form h3, .login-form h3, .user-edit-form h3 {
+  .register-form h3, .login-form h3, .user-edit-form h3, .new-playlist-form h3 {
     font-size: 4vw;
   }
-  .register-form em, .login-form em, .user-edit-form em {
+  .register-form em, .login-form em, .user-edit-form em, .new-playlist-form em, .new-playlist-form span {
     font-size: 2vw;
   }
 }
@@ -569,4 +572,40 @@ header {
 }
 .playlists-card {
   margin-bottom: 1.5%;
+}
+.new-playlist-redirect {
+  margin-left: 5%;
+  font-size: 2.5vw;
+  font-weight: 700;
+  color: #888;
+}
+.new-playlist-redirect a {
+  color: rgb(102, 221, 170);
+  transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
+}
+.new-playlist-redirect a:hover {
+  color: #888;
+  transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
+}
+/* CREATE PLAYLIST PAGE */
+.new-playlist-form {
+  margin-left: 5%;
+}
+.new-playlist-form h3 {
+  margin: 0;
+}
+.new-playlist-form p {
+  margin: 0 0 10px 0;
+}
+.new-playlist-form p:nth-of-type(2) {
+  margin: 0 0 20px 0;
+}
+.new-playlist textarea {
+  margin-top: 0.5%;
+  width: 23vw;
+  height: 5vw;
 }

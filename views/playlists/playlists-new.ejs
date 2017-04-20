@@ -2,15 +2,30 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>NEW PLAYLIST | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
-  <body>
-      <form action="/playlists" method="POST">
-        <input type="text" name="title" placeholder="title">
-        <input type="text" name="coverImage" placeholder="mixtape cover image url">
-        <input type="text" name="description" placeholder="description">
-        <input type="checkbox" name="privOrPub" /> I want this playlist to be public
-        <input type="submit" value="CREATE" />
-      </form>
+  <body class="vinyl-bg-login">
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="new-playlist-form">
+        <h1><strong>CREATE</strong> A PLAYLIST</h1>
+        <form action="/playlists" method="POST" class="new-playlist">
+          <h3>DETAILS</h3>
+          <p>
+            <em>* REQUIRED FIELDS</em>
+          </p>
+          <input type="text" name="title" placeholder="title *" id="new-playlist-title">
+          <input type="text" name="coverImage" placeholder="cover image url"><br />
+          <textarea name="text" placeholder="description"></textarea><br />
+          <input type="checkbox" name="privOrPub" /> <span>I want this playlist to be public</span>
+          <p class="new-playlist-error-message">
+          </p>
+          <p>
+            <a class="new-playlist-button">ADD SONGS</a>
+          </p>
+        </form>
+      </section>
+    </main>
   </body>
 </html>

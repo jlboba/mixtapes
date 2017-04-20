@@ -38,5 +38,12 @@
         <% } %>
       </div>
     </section>
+    <section class="new-playlist-redirect">
+      <% if (currentUser) { %>
+        <a href="/playlists/new">CREATE A PLAYLIST</a>
+      <% } else { %>
+          <a href="/sessions/new">LOGIN</a> OR <a href="/users/new">JOIN</a> TO CREATE A PLAYLIST!
+      <% } %>
+    </div>
   </body>
 </html>
