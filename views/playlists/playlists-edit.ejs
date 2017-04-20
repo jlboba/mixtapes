@@ -2,14 +2,28 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>EDIT <%=playlist.title%> | MIXTAPES</title>
+    <title>EDIT <%=playlist.title.toUpperCase()%> | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
-  <body>
-    <form action="/playlists/<%=playlist.id%>?_method=PUT" method="POST">
-      <input type="text" name="title" placeholder="title" value="<%=playlist.title%>">
-      <input type="text" name="coverImage" placeholder="cover image" value="<%=playlist.coverImage%>">
-      <input type="text" name="description" placeholder="description" value="<%=playlist.description%>">
-      <input type="submit" value="edit" />
-    </form>
+  <body class="vinyl-bg-login">
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="edit-playlist-form">
+        <h1><strong>EDIT</strong> YOUR PLAYLIST</h1>
+        <form action="/playlists/<%=playlist.id%>?_method=PUT" method="POST" class="edit-playlist">
+          <h3>DETAILS</h3>
+          <p>
+            <em>* REQUIRED FIELDS</em>
+          </p>
+          <input type="text" name="title" placeholder="title *" value="<%=playlist.title%>" id="edit-playlist-title">
+          <input type="text" name="coverImage" placeholder="cover image url" value="<%=playlist.coverImage%>"><br />
+          <textarea name="text" placeholder="description"><%=playlist.description%></textarea>
+          <p class="edit-playlist-error-message">
+          </p>
+          <p>
+            <a class="edit-playlist-button">EDIT SONGS</a>
+          </p>
+      </section>
+    </main>
   </body>
 </html>

@@ -20,6 +20,9 @@ $(function(){ // start window onload
   // create playlist
   $('.new-playlist-button').on('click', submitButtons.newPlaylistForm);
 
+  // edit playlist
+  $('.edit-playlist-button').on('click', submitButtons.editPlaylistForm);
+
   // ===== ISOTOPE METAFIZZY (isotope.metafizzy.co) =======
   // initialize isotope
     var $container = $('.playlists-index-container').isotope({
@@ -118,6 +121,16 @@ var submitButtons = {
       $error.html('<em>please provide a title for the playlist!');
     } else {
       $('.new-playlist').submit();
+    }
+  },
+  editPlaylistForm: function(){
+    var $title = $('#edit-playlist-title');
+    var $error = $('.edit-playlist-error-message');
+    if($title.val() === ''){
+      $title.addClass('form-validate');
+      $error.html('<em>please provide a title for the playlist!');
+    } else {
+      $('.edit-playlist').submit();
     }
   }
 }
