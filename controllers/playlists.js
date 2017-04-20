@@ -56,10 +56,13 @@ router.get('/:id/edit', function(req, res){
 });
 
 // edit playlist songs page
-router.get('/edit-songs/:id', function(req, res){
-  Song.findById(req.params.id, function(err, foundSongs){
-    res.render('songs/songs-edit.ejs', {
-      songs: foundSongs
+router.get('/:playlistId/edit-songs/:songsId', function(req, res){
+  Playlist.findById(req.params.playlistId, function(err, foundPlaylist){
+    Song.findById(req.params.songsId, function(err, foundSongs){
+      res.render('songs/songs-edit.ejs', {
+        songs: foundSongs,
+        playlist: foundPlaylist
+      });
     });
   });
 });
@@ -125,16 +128,16 @@ router.put('/:id', function(req, res){
         foundUser.playlists.id(req.params.id).remove();
         foundUser.playlists.push(updatedPlaylist);
         foundUser.save(function(err, savedUser){
-          res.redirect('/playlists/edit-songs/' + updatedPlaylist.songs.id);
+          res.redirect('/playlists/' + updatedPlaylist.id + '/edit-songs/' + updatedPlaylist.songs.id);
         });
       });
   });
 });
 
 // edit playlist songs
-router.put('/edit-songs/:id', function(req, res){
-  Song.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, updatedSongs){
-    Playlist.findOne({ 'songs._id': req.params.id }, function(err, foundPlaylist){
+router.put('/:playlistId/edit-songs/:songId', function(req, res){
+  Song.findByIdAndUpdate(req.params.songId, req.body, { new: true }, function(err, updatedSongs){
+    Playlist.findOne({ 'songs._id': req.params.songId }, function(err, foundPlaylist){
       foundPlaylist.songs.remove();
       foundPlaylist.songs = updatedSongs;
       foundPlaylist.save(function(err, savedPlaylist){

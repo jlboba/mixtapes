@@ -2,17 +2,28 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>EDIT SONGS ON <%=playlist.title.toUpperCase()%> | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
-  <body>
-    <form action="/playlists/edit-songs/<%=songs.id%>?_method=PUT" method="POST">
-    <% for(var i = 0; i < songs.title.length; i++){ %>
-        <input type="text" name="title" placeholder="song title" value="<%=songs.title[i]%>" />
-        <input type="text" name="artist" placeholder="song artist" value="<%=songs.artist[i]%>"/>
-        <input type="text" name="link" placeholder="youtube link to song" value="<%=songs.link[i]%>"/>
-        <input type="text" name="description" placeholder="description of song" value="<%=songs.description[i]%>"/><br />
-    <% } %>
-    <input type="submit" value="submit"/>
-    </form>
+  <body class="vinyl-bg">
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="edit-songs">
+        <h1><strong>EDIT</strong> SONGS ON<br /><%=playlist.title%></h1>
+        <section class="edit-songs-form">
+          <form action="/playlists/<%=playlist.id%>/edit-songs/<%=songs.id%>?_method=PUT" method="POST" class="songs-edit-form">
+            <% for(var i = 0; i < songs.title.length; i++){ %>
+              <h3>SONG <%=i+1%></h3>
+              <em>* required fields</em><br />
+              <input type="text" name="title" placeholder="song title *" id="edit-song-title" value="<%=songs.title[i]%>"/>
+              <input type="text" name="artist" placeholder="song artist *" id="edit-song-artist" value="<%=songs.artist[i]%>"/><br />
+              <input type="text" name="link" placeholder="youtube link to song *" id="edit-song-link" value="<%=songs.link[i]%>"/><br />
+              <textarea name="description" placeholder="description of song" /><%=songs.description[i]%></textarea>
+            <% } %>
+          </form>
+        </section>
+        <a class="generate-edit-new-song-field">ADD ANOTHER SONG</a> <a class="edit-songs-button">COMPLETE PLAYLIST</a>
+      </section>
+    </main>
   </body>
 </html>

@@ -102,7 +102,7 @@ header {
   padding: 0;
   margin: 10px 0;
 }
-.intro-button, .register-button, .login-button, .user-edit-button, .new-playlist-button, .edit-playlist-button, .add-songs-button, .edit-songs-button, .generate-new-song-field {
+.intro-button, .register-button, .login-button, .user-edit-button, .new-playlist-button, .edit-playlist-button, .add-songs-button, .edit-songs-button, .generate-new-song-field, .generate-edit-new-song-field{
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -115,7 +115,7 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:before, .register-button:before, .login-button:before, .user-edit-button:before, .new-playlist-button:before, .edit-playlist-button:before, .add-songs-button:before, .edit-songs-button:before, .generate-new-song-field:before {
+.intro-button:before, .register-button:before, .login-button:before, .user-edit-button:before, .new-playlist-button:before, .edit-playlist-button:before, .add-songs-button:before, .edit-songs-button:before, .generate-new-song-field:before, .generate-edit-new-song-field:before {
   content: "";
   position: absolute;
   background: rgb(102, 221, 170);
@@ -128,12 +128,12 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:hover, .register-button:hover, .login-button:hover, .user-edit-button:hover, .new-playlist-button:hover, .edit-playlist-button:hover, .add-songs-button:hover, .edit-songs-button:hover, .generate-new-song-field:hover {
+.intro-button:hover, .register-button:hover, .login-button:hover, .user-edit-button:hover, .new-playlist-button:hover, .edit-playlist-button:hover, .add-songs-button:hover, .edit-songs-button:hover, .generate-new-song-field:hover, .generate-edit-new-song-field:hover {
   color: whitesmoke;
   border: 1px solid rgb(102, 221, 170);
   cursor: pointer;
 }
-.intro-button:hover:before, .register-button:hover:before, .login-button:hover:before, .user-edit-button:hover:before, .new-playlist-button:hover:before, .edit-playlist-button:hover:before, .add-songs-button:hover:before, .edit-songs-button:hover:before, .generate-new-song-field:hover:before {
+.intro-button:hover:before, .register-button:hover:before, .login-button:hover:before, .user-edit-button:hover:before, .new-playlist-button:hover:before, .edit-playlist-button:hover:before, .add-songs-button:hover:before, .edit-songs-button:hover:before, .generate-new-song-field:hover:before, .generate-edit-new-song-field:hover:before {
   right: 0;
 }
 @media (max-width: 775px) {
@@ -636,7 +636,7 @@ header {
   margin-left: 5%;
   margin-top: -6%;
 }
-.add-songs-form {
+.add-songs-form, .edit-songs-form {
   width: 65%;
   max-height: 26vw;
   margin-bottom: 15px;
@@ -647,12 +647,12 @@ header {
   padding: 0;
   margin: 0;
 }
-.add-songs-form textarea {
+.add-songs-form textarea, .edit-songs-form textarea {
   width: 23vw;
   height: 4vw;
   margin-top: 5px;
 }
-#add-song-link {
+#add-song-link, #edit-song-link {
   width: 23vw;
   margin-top: 5px;
 }

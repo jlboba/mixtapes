@@ -24,11 +24,17 @@ $(function(){ // start window onload
   $('.edit-playlist-button').on('click', submitButtons.editPlaylistForm);
 
   // ------- songs
-  // generate a new song field
+  // generate a new song field (add songs)
   $('.generate-new-song-field').on('click', addingSongs.generateSongField);
 
   // add songs to playlist
   $('.add-songs-button').on('click', addingSongs.addSongsForm);
+
+  // generate a new songs field (edit songs)
+  $('.generate-edit-new-song-field').on('click', addingSongs.generateSongFieldEdit);
+
+  // edit songs on playlist
+  $('.edit-songs-button').on('click', addingSongs.editSongsForm);
 
   // ===== ISOTOPE METAFIZZY (isotope.metafizzy.co) =======
   // initialize isotope
@@ -150,8 +156,15 @@ var addingSongs = {
     var $form = $('.songs-form');
     $form.append('<h3>SONG ' + songCount + '</h3><em>* required fields</em><br /><input type="text" name="title" placeholder="song title *" id="add-song-title"/><input type="text" name="artist" placeholder="song artist *" id="add-song-artist"/><br /><input type="text" name="link" placeholder="youtube link to song *" id="add-song-link"/><br /><textarea name="description" placeholder="description of song" /></textarea>');
   },
+  generateSongFieldEdit: function(){
+    var $form = $('.songs-edit-form');
+    $form.append('<h3>ADDED SONG</h3><em>* required fields</em><br /><input type="text" name="title" placeholder="song title *" id="add-song-title"/><input type="text" name="artist" placeholder="song artist *" id="add-song-artist"/><br /><input type="text" name="link" placeholder="youtube link to song *" id="add-song-link"/><br /><textarea name="description" placeholder="description of song" /></textarea>');
+  },
   addSongsForm: function(){
     songCount = 0;
     $('.songs-form').submit();
+  },
+  editSongsForm: function(){
+    $('.songs-edit-form').submit();
   }
 }
