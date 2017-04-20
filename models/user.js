@@ -10,7 +10,7 @@ var userSchema = Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   displayName: { type: String },
-  icon: { type: String, default: 'http://placehold.it/100x100.png'},
+  icon: { type: String, default: 'http://imgur.com/yTksJch.png'},
   description: { type: String },
   playlists: [Playlist.schema],
   likedPlaylists: [Playlist.schema],

@@ -2,16 +2,37 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>USERS | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
   <body>
-    <ul>
-      <% for(var i = 0; i < users.length; i++) { %>
-          <li>
-            <a href="/users/<%=users[i].id%>"><%=users[i].username%></a>
-          </li>
-      <% } %>
-    </ul>
-    <a href="/users/new">new user</a>
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="users-index">
+        <h1>OUR <strong>USERS</strong></h1>
+        <div class="users-index-container">
+          <% for(var i = 0; i < users.length; i++) { %>
+              <% if(i % 3 === 0) { %>
+                  <% if(i !== 0) { %>
+                    </div>
+                  <% } %>
+                  <div class="users-row">
+              <% } %>
+              <div class="user-card">
+                <div>
+                  <img src="<%=users[i].icon%>">
+                </div>
+                <div class="user-stats">
+                  <a href="/users/<%=users[i].id%>"><%=users[i].displayName%></a><br />
+                  <em>@ <%=users[i].username%> // <%=users[i].playlists.length%> playlists</em>
+                  <blockquote>
+                    <%=users[i].description%>
+                  </blockquote>
+                </div>
+              </div>
+          <% } %>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
