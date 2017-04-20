@@ -23,6 +23,13 @@ $(function(){ // start window onload
   // edit playlist
   $('.edit-playlist-button').on('click', submitButtons.editPlaylistForm);
 
+  // ------- songs
+  // generate a new song field
+  $('.generate-new-song-field').on('click', addingSongs.generateSongField);
+
+  // add songs to playlist
+  $('.add-songs-button').on('click', addingSongs.addSongsForm);
+
   // ===== ISOTOPE METAFIZZY (isotope.metafizzy.co) =======
   // initialize isotope
     var $container = $('.playlists-index-container').isotope({
@@ -49,7 +56,7 @@ $(function(){ // start window onload
 }); // end window onload
 
 // ====== EVENT HANDLERS ========
-
+// submit buttons object
 var submitButtons = {
   logoutForm: function(){
     $('.logout').submit();
@@ -132,5 +139,19 @@ var submitButtons = {
     } else {
       $('.edit-playlist').submit();
     }
+  }
+}
+// adding/editing songs object (and global variable)
+var songCount = 1;
+
+var addingSongs = {
+  generateSongField: function(){
+    songCount++;
+    var $form = $('.songs-form');
+    $form.append('<h3>SONG ' + songCount + '</h3><em>* required fields</em><br /><input type="text" name="title" placeholder="song title *" id="add-song-title"/><input type="text" name="artist" placeholder="song artist *" id="add-song-artist"/><br /><input type="text" name="link" placeholder="youtube link to song *" id="add-song-link"/><br /><textarea name="description" placeholder="description of song" /></textarea>');
+  },
+  addSongsForm: function(){
+    songCount = 0;
+    $('.songs-form').submit();
   }
 }

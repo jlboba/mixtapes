@@ -13,7 +13,7 @@ a {
 strong {
   color: rgb(102, 221, 170);
 }
-.site-intro h1, .register-form h1, .login-form h1, .users-index h1, .user-edit-form h1, .show-user h1, .playlists-index h1, .new-playlist-form h1, .edit-playlist-form h1 {
+.site-intro h1, .register-form h1, .login-form h1, .users-index h1, .user-edit-form h1, .show-user h1, .playlists-index h1, .new-playlist-form h1, .edit-playlist-form h1, .add-songs h1, .edit-songs h1 {
   font-size: 6.5vw;
   letter-spacing: -2px;
   padding: 0;
@@ -102,7 +102,7 @@ header {
   padding: 0;
   margin: 10px 0;
 }
-.intro-button, .register-button, .login-button, .user-edit-button, .new-playlist-button, .edit-playlist-button {
+.intro-button, .register-button, .login-button, .user-edit-button, .new-playlist-button, .edit-playlist-button, .add-songs-button, .edit-songs-button, .generate-new-song-field {
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -115,7 +115,7 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:before, .register-button:before, .login-button:before, .user-edit-button:before, .new-playlist-button:before, .edit-playlist-button:before {
+.intro-button:before, .register-button:before, .login-button:before, .user-edit-button:before, .new-playlist-button:before, .edit-playlist-button:before, .add-songs-button:before, .edit-songs-button:before, .generate-new-song-field:before {
   content: "";
   position: absolute;
   background: rgb(102, 221, 170);
@@ -128,12 +128,12 @@ header {
   -moz-transition: 0.2s ease-in;
   -webkit-transition: 0.2s ease-in;
 }
-.intro-button:hover, .register-button:hover, .login-button:hover, .user-edit-button:hover, .new-playlist-button:hover, .edit-playlist-button:hover {
+.intro-button:hover, .register-button:hover, .login-button:hover, .user-edit-button:hover, .new-playlist-button:hover, .edit-playlist-button:hover, .add-songs-button:hover, .edit-songs-button:hover, .generate-new-song-field:hover {
   color: whitesmoke;
   border: 1px solid rgb(102, 221, 170);
   cursor: pointer;
 }
-.intro-button:hover:before, .register-button:hover:before, .login-button:hover:before, .user-edit-button:hover:before, .new-playlist-button:hover:before, .edit-playlist-button:hover:before {
+.intro-button:hover:before, .register-button:hover:before, .login-button:hover:before, .user-edit-button:hover:before, .new-playlist-button:hover:before, .edit-playlist-button:hover:before, .add-songs-button:hover:before, .edit-songs-button:hover:before, .generate-new-song-field:hover:before {
   right: 0;
 }
 @media (max-width: 775px) {
@@ -187,12 +187,12 @@ header {
 .register-form p:nth-of-type(3), .login-form p:nth-of-type(2), .user-edit-form p:nth-of-type(3), .new-playlist-form p:nth-of-type(2), .edit-playlist-form p:nth-of-type(2) {
   margin: 20px 0;
 }
-.register-form em, .login-form em, .user-edit-form em, .new-playlist-form em, .edit-playlist-form em{
+.register-form em, .login-form em, .user-edit-form em, .new-playlist-form em, .edit-playlist-form em, .add-songs-form em, .edit-songs-form em{
   color: #888;
   text-transform: uppercase;
   font-size: 1.2vw;
 }
-.register-form input, .register-form textarea, .login input, .user-edit-form input, .user-edit-form textarea, .new-playlist input, .new-playlist textarea, .edit-playlist input, .edit-playlist textarea {
+.register-form input, .register-form textarea, .login input, .user-edit-form input, .user-edit-form textarea, .new-playlist input, .new-playlist textarea, .edit-playlist input, .edit-playlist textarea, .add-songs-form input, .add-songs-form textarea, .edit-songs-form input, .edit-songs-form textarea{
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #eee;
@@ -202,7 +202,19 @@ header {
   width: 31.5%;
   height: 7vh;
 }
-.register-form input[placeholder], .register-form textarea[placeholder], .login input[placeholder], .user-edit-form input[placeholder], .new-playlist input[placeholder], .new-playlist textarea[placeholder], .edit-playlist input[placeholder], .edit-playlist textarea[placeholder]{
+.register-form input[placeholder],
+.register-form textarea[placeholder],
+.login input[placeholder],
+.user-edit-form input[placeholder],
+.new-playlist input[placeholder],
+.new-playlist textarea[placeholder],
+.edit-playlist input[placeholder],
+.edit-playlist textarea[placeholder],
+.add-songs-form textarea[placeholder],
+.add-songs-form input[placeholder],
+.edit-songs-form textarea[placeholder],
+.edit-songs-form input[placeholder]
+{
   text-transform: uppercase;
 }
 .register-form input[type="text"]:focus,
@@ -218,12 +230,16 @@ header {
 .new-playlist-form textarea:focus,
 .edit-playlist-form input[type="text"]:focus,
 .edit-playlist-form input[type="password"]:focus,
-.edit-playlist-form textarea:focus
+.edit-playlist-form textarea:focus,
+.add-songs-form textarea:focus,
+.add-songs-form input[type="text"]:focus,
+.edit-songs-form textarea:focus,
+.edit-songs-form input[type="text"]:focus
  {
   border: 1px solid rgb(102, 221, 170);
   outline: none;
 }
-.register-form .form-validate, .login-form .form-validate, .user-edit-form .form-validate, .new-playlist-form .form-validate, .edit-playlist-form .form-validate {
+.register-form .form-validate, .login-form .form-validate, .user-edit-form .form-validate, .new-playlist-form .form-validate, .edit-playlist-form .form-validate, .edit-songs-form .form-validate, .add-songs-form .form-validate {
   border: 1px solid rgb(239, 103, 93);
 }
 @media (max-width: 775px) {
@@ -240,13 +256,13 @@ header {
     width: 90%;
     text-align: center;
   }
-  .register-form h1, .login-form h1, .user-edit-form h1, .new-playlist-form h1, .edit-playlist-form h1 {
+  .register-form h1, .login-form h1, .user-edit-form h1, .new-playlist-form h1, .edit-playlist-form h1, .add-songs h1 {
     font-size: 8vw;
   }
   .register-form h3, .login-form h3, .user-edit-form h3, .new-playlist-form h3, .edit-playlist-form h3 {
     font-size: 4vw;
   }
-  .register-form em, .login-form em, .user-edit-form em, .new-playlist-form em, .edit-playlist-form em {
+  .register-form em, .login-form em, .user-edit-form em, .new-playlist-form em, .edit-playlist-form em, .add-songs-form em, .edit-songs-form em {
     font-size: 2vw;
   }
 }
@@ -259,6 +275,7 @@ header {
 }
 .login-form {
   margin-left: 5%;
+  width: 70%;
 }
 @media (max-width: 775px) {
   .vinyl-bg-login {
@@ -507,7 +524,7 @@ header {
 .user-liked-playlist-info h4 {
   text-transform: uppercase;
   margin: 0;
-  font-size: 2.2vw;
+  font-size: 1.5vw;
   color: #444;
 }
 .user-created-playlist-info p,
@@ -612,4 +629,30 @@ header {
   margin-top: 0.5%;
   width: 23vw;
   height: 5vw;
+}
+/* ADD SONGS & EDIT SONGS PAGE */
+.add-songs, .edit-songs {
+  width: 70%;
+  margin-left: 5%;
+  margin-top: -6%;
+}
+.add-songs-form {
+  width: 65%;
+  max-height: 26vw;
+  margin-bottom: 15px;
+  overflow: auto;
+}
+.add-songs-form h3, .edit-songs-form h3 {
+  font-size: 2vw;
+  padding: 0;
+  margin: 0;
+}
+.add-songs-form textarea {
+  width: 23vw;
+  height: 4vw;
+  margin-top: 5px;
+}
+#add-song-link {
+  width: 23vw;
+  margin-top: 5px;
 }

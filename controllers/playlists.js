@@ -34,8 +34,11 @@ router.get('/new', function(req, res){
 
 // add songs to playlist page
 router.get('/:id/add-songs', function(req, res){
-  res.render('songs/songs-new.ejs', {
-    playlistId: req.params.id
+  Playlist.findById(req.params.id, function(err, foundPlaylist){
+    res.render('songs/songs-new.ejs', {
+      playlistId: req.params.id,
+      playlist: foundPlaylist
+    });
   });
 });
 

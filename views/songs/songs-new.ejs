@@ -2,36 +2,26 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>ADD SONGS TO <%=playlist.title.toUpperCase()%> | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
-  <body>
-    <form action="/playlists/<%=playlistId%>" method="POST">
-      <input type="text" name="title" placeholder="song title" />
-      <input type="text" name="artist" placeholder="song artist" />
-      <input type="text" name="link" placeholder="youtube link to song" />
-      <input type="text" name="description" placeholder="description of song" />
-      <br/>
-      <input type="text" name="title" placeholder="song title" />
-      <input type="text" name="artist" placeholder="song artist" />
-      <input type="text" name="link" placeholder="youtube link to song" />
-      <input type="text" name="description" placeholder="description of song" />
-      <br />
-      <input type="text" name="title" placeholder="song title" />
-      <input type="text" name="artist" placeholder="song artist" />
-      <input type="text" name="link" placeholder="youtube link to song" />
-      <input type="text" name="description" placeholder="description of song" />
-      <br />
-      <input type="text" name="title" placeholder="song title" />
-      <input type="text" name="artist" placeholder="song artist" />
-      <input type="text" name="link" placeholder="youtube link to song" />
-      <input type="text" name="description" placeholder="description of song" />
-      <br />
-      <input type="text" name="title" placeholder="song title" />
-      <input type="text" name="artist" placeholder="song artist" />
-      <input type="text" name="link" placeholder="youtube link to song" />
-      <input type="text" name="description" placeholder="description of song" />
-      <br />
-      <input type="submit" value="add songs" />
-    </form>
+  <body class="vinyl-bg">
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="add-songs">
+        <h1><strong>ADD</strong> SONGS TO<br /><%=playlist.title%></h1>
+        <section class="add-songs-form">
+          <form action="/playlists/<%=playlistId%>" method="POST" class="songs-form">
+            <h3>SONG 1</h3>
+            <em>* required fields</em><br />
+            <input type="text" name="title" placeholder="song title *" id="add-song-title"/>
+            <input type="text" name="artist" placeholder="song artist *" id="add-song-artist"/><br />
+            <input type="text" name="link" placeholder="youtube link to song *" id="add-song-link"/><br />
+            <textarea name="description" placeholder="description of song" /></textarea>
+          </form>
+        </section>
+        <a class="generate-new-song-field">ADD ANOTHER SONG</a> <a class="add-songs-button">COMPLETE PLAYLIST</a>
+      </section>
+    </main>
   </body>
 </html>
