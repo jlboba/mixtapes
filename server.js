@@ -18,7 +18,7 @@ app.use(session({
   saveUninitialized: false // if nothing's been saved, don't save it
 }));
 app.use(function(req, res, next) {
-  res.locals.currentUser = req.session.currentuser;
+  res.locals.currentUser = req.session.currentUser;
   next();
 });
 // body parser
