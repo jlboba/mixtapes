@@ -2,16 +2,41 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>PLAYLISTS | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
   <body>
-    <ul>
-      <% for(var i = 0; i < playlists.length; i++) { %>
-          <li>
-            <a href="/playlists/<%=playlists[i].id%>"><%=playlists[i].title%></a>
-          </li>
-      <% } %>
-    </ul>
-    <a href="/playlists/new">new playlist</a>
+    <% include ../partials/nav.ejs %>
+    <section class="playlists-index">
+      <h1>OUR <strong>PLAYLISTS</strong></h1>
+      <div class="filter-playlists-nav">
+        <strong>BY:</strong> <a class="filter-playlists is-checked" data-filter="*">all</a>
+        <% for(var i = 0; i < users.length; i++){ %>
+          <a class="filter-playlists" data-filter=".<%=users[i].username%>"><%=users[i].username%></a>
+        <% } %>
+      </div>
+      <div class="playlists-index-container">
+        <% for(var i = 0; i < playlists.length; i++) { %>
+          <% if(i % 3 === 0) { %>
+              <% if(i !== 0) { %>
+                </div>
+              <% } %>
+              <div class="playlists-row">
+          <% } %>
+          <div class="playlists-card <%=playlists[i].creator%>">
+            <div>
+              <img src="<%=playlists[i].coverImage%>">
+            </div>
+            <div class="playlists-stats">
+              <a href="/playlists/<%=playlists[i].id%>"><%=playlists[i].title%></a><br />
+              <em>by: <%=playlists[i].creator%> // <%=playlists[i].songs.title.length%> songs</em>
+              <blockquote>
+                <%=playlists[i].description%>
+              </blockquote>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </section>
   </body>
 </html>

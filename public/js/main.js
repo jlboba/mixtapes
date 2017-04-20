@@ -14,7 +14,30 @@ $(function(){ // start window onload
 
   // delete user
   $('.user-delete-button').on('click', submitButtons.userDeleteForm);
-  
+
+  // ===== ISOTOPE METAFIZZY (isotope.metafizzy.co) =======
+  // initialize isotope
+    var $container = $('.playlists-index-container').isotope({
+      itemSelector: '.playlists-card',
+      layoutMode: 'fitRows',
+      fitRows: {
+        gutter: 15
+      }
+    });
+    // event listener
+    $('.filter-playlists').on('click', function(){
+      var filterValue = $(this).attr('data-filter');
+      $container.isotope({filter: filterValue});
+    });
+    // changes what button is checked
+    $('.filter-playlists-nav').each( function( i, buttonGroup ) {
+      var $buttonGroup = $(buttonGroup);
+      $buttonGroup.on('click', 'a', function() {
+        $buttonGroup.find('.is-checked').removeClass('is-checked');
+        $(this).addClass('is-checked');
+      });
+    });
+
 }); // end window onload
 
 // ====== EVENT HANDLERS ========

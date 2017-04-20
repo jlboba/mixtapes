@@ -13,7 +13,7 @@ a {
 strong {
   color: rgb(102, 221, 170);
 }
-.site-intro h1, .register-form h1, .login-form h1, .users-index h1, .user-edit-form h1, .show-user h1 {
+.site-intro h1, .register-form h1, .login-form h1, .users-index h1, .user-edit-form h1, .show-user h1, .playlists-index h1 {
   font-size: 6.5vw;
   letter-spacing: -2px;
   padding: 0;
@@ -265,12 +265,12 @@ header {
   }
 }
 /* USERS SHOW PAGE */
-.users-index {
+.users-index, .playlists-index {
   width: 90%;
   margin-left: 5%;
   margin-top: -5%;
 }
-.users-index h1:after {
+.users-index h1:after, .playlists-index h1:after {
   content:'';
   display: block;
   width: 12%;
@@ -278,15 +278,15 @@ header {
   background: #888;
   margin-top: -0.5%;
 }
-.users-index-container {
+.users-index-container, .playlists-index-container {
   margin-top: 3%;
 }
-.users-row {
+.users-row, .playlists-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5%;
 }
-.user-card {
+.user-card, .playlists-card {
   width: 30%;
   height: 8vw;
   background: #eee;
@@ -295,15 +295,15 @@ header {
   display: flex;
   justify-content: space-between;
 }
-.user-card img {
+.user-card img, .playlists-card img {
   width: 100px;
   height: 100px;
   border-radius: 50px;
 }
-.user-stats {
+.user-stats, .playlists-stats {
   width: 60%;
 }
-.user-stats a {
+.user-stats a, .playlists-stats a {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 3vh;
@@ -312,18 +312,18 @@ header {
   -moz-transition: 0.5s;
   -webkit-transition: 0.5s;
 }
-.user-stats a:hover {
+.user-stats a:hover, .playlists-stats a:hover {
   color: rgb(102, 221, 170);
   transition: 0.5s;
   -moz-transition: 0.5s;
   -webkit-transition: 0.5s;
 }
-.user-stats em {
+.user-stats em, .playlists-stats em {
   color: #888;
   text-transform: uppercase;
   font-size: 1.9vh;
 }
-.user-stats em:after {
+.user-stats em:after, .playlists-stats em:after {
   content:'';
   display: block;
   width: 100%;
@@ -331,7 +331,7 @@ header {
   margin-top: 5px;
   background: #ccc;
 }
-.user-stats blockquote {
+.user-stats blockquote, .playlists-stats blockquote {
   width: 100%;
   height: 55%;
   font-size: 2vh;
@@ -341,46 +341,46 @@ header {
   box-sizing: border-box;
 }
 @media (max-width: 1084px) {
-  .user-card {
+  .user-card, .playlists-card {
     height: 11vw;
   }
 }
 @media (max-width: 800px) {
-  .user-card {
+  .user-card, .playlists-card {
     height: 10vw;
   }
-  .user-card img {
+  .user-card img, .playlists-card img {
     height: 60px;
     width: 60px;
   }
-  .user-stats {
+  .user-stats, .playlists-stats {
     width: 80%;
     margin-left: 3%;
   }
-  .user-stats a {
+  .user-stats a, .playlists-stats a {
     font-size: 2.4vh;
   }
-  .user-stats em {
+  .user-stats em, .playlists-stats em {
     font-size: 1.8vh;
   }
-  .user-stats blockquote {
+  .user-stats blockquote, .playlists-stats blockquote {
     display: none;
   }
 }
 @media (max-width: 700px) {
-  .users-index h1 {
+  .users-index h1, .playlists-index h1 {
     font-size: 8vh;
   }
-  .users-index h1:after {
+  .users-index h1:after, .playlists-index h1:after {
     width: 20%;
   }
-  .user-card {
+  .user-card, .playlists-card {
     width: 27%;
   }
-  .user-card img {
+  .user-card img, .playlists-card img {
     display: none;
   }
-  .user-stats {
+  .user-stats, .playlists-stats {
     width: 100%;
   }
 }
@@ -539,4 +539,34 @@ header {
 .user-liked-playlist-info em {
   font-size: 1.3vw;
   text-transform: uppercase;
+}
+/* PLAYLIST INDEX PAGE */
+.filter-playlists-nav {
+  margin-top: 20px;
+}
+.filter-playlists-nav a {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #888;
+  border-bottom: 4px solid transparent;
+  margin-right: 10px;
+  transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
+}
+.filter-playlists-nav a:first-of-type {
+  margin-left: 10px;
+}
+.filter-playlists-nav a:hover {
+  cursor: pointer;
+  border-bottom: 4px solid rgb(102, 221, 170);
+  transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
+}
+.filter-playlists-nav .is-checked {
+  border-bottom: 4px solid rgb(102, 221, 170);
+}
+.playlists-card {
+  margin-bottom: 1.5%;
 }

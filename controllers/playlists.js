@@ -9,9 +9,12 @@ var router = express();
 // ====================== GET ROUTES ====================
 // index page
 router.get('/', function(req, res){
-  Playlist.find({}, function(err, foundPlaylists){
-    res.render('playlists/playlists-index.ejs', {
-      playlists: foundPlaylists
+  User.find({}, function(err, foundUsers){
+    Playlist.find({}, function(err, foundPlaylists){
+      res.render('playlists/playlists-index.ejs', {
+        playlists: foundPlaylists,
+        users: foundUsers
+      });
     });
   });
 });
