@@ -2,15 +2,31 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>EDIT <%=user.username.toUpperCase()%> | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
-  <body>
-    <h1>editing <%=user.username%></h1>
-    <form action="/users/<%=user.id%>?_method=PUT" method="POST">
-      <input type="password" name="password" placeholder="password" />
-      <input type="text" name="displayName" value="<%=user.displayName%>" placeholder="display name">
-      <input type="text" name="icon" value="<%=user.icon%>" placeholder="icon url">
-      <input type="text" name="description" value="<%=user.description%>" placeholder="description">
-      <input type="submit" value="edit" />
+  <body class="vinyl-bg-reg">
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="user-edit-form">
+        <h1><strong>EDIT</strong> YOUR ACCOUNT, <%=user.displayName.toUpperCase()%></h1>
+        <form action="/users/<%=user.id%>?_method=PUT" method="POST" class="user-edit">
+          <h3>ACCOUNT</h3>
+          <p>
+            <em>* Password required to edit your profile</em>
+          </p>
+          <input type="password" name="password" placeholder="password" id="user-edit-password"/>
+          <p class="user-edit-error-message">
+          </p>
+          <h3>PROFILE</h3>
+          <input type="text" name="displayName" value="<%=user.displayName%>" placeholder="display name">
+          <input type="text" name="icon" value="<%=user.icon%>" placeholder="icon url"><br />
+          <textarea name="description" placeholder="description"><%=user.description%></textarea>
+          <p>
+            <a class="user-edit-button">EDIT</a>
+          </p>
+        </form>
+      </section>
+    </main>
   </body>
 </html>

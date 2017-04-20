@@ -8,6 +8,10 @@ $(function(){ // start window onload
 
   // login
   $('.login-button').on('click', submitButtons.loginForm);
+
+  // edit user
+  $('.user-edit-button').on('click', submitButtons.userEditForm);
+
 }); // end window onload
 
 // ====== EVENT HANDLERS ========
@@ -60,6 +64,16 @@ var submitButtons = {
         $error.html('<em>please provide your password!</em>');
     } else {
         $('.login').submit();
+    }
+  },
+  userEditForm: function(){
+    var $password = $('#user-edit-password');
+    var $error = $('.user-edit-error-message');
+    if($password.val() === ''){
+      $password.addClass('form-validate');
+      $error.html('<em>please provide either your old password or create a new one!</em>');
+    } else {
+      $('.user-edit').submit();
     }
   }
 }

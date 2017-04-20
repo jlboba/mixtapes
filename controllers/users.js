@@ -68,8 +68,19 @@ router.post('/', function(req, res){
 
 // edit an account
 router.put('/:id', function(req, res){
-  User.findByIdAndUpdate(req.params.id, req.body, function(err, foundUser){
-    res.redirect('/users/' + req.params.id);
+  if(req.body.password !== "") {
+    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)); // encrypt the password
+  }
+  if(req.body.icon === ""){ // if the user didn't put an icon
+    req.body.icon = 'http://imgur.com/yTksJch.png'; // set it to the default
+  };
+  User.findById(req.params.id, function(err, foundUser){
+    if(req.body.displayName === ""){ // if the user didn't enter a display name
+      req.body.displayName = foundUser.username; // set it equal to their username
+    };
+    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, updatedUser){
+      res.redirect('/users/' + req.params.id);
+    });
   });
 });
 
