@@ -143,6 +143,9 @@ router.get('/:id', function(req, res){
 // create a playlist
 router.post('/', function(req, res){
   req.body.creator = req.session.currentUser.username;
+  if(req.body.coverImage === ""){ // if the user didn't put a cover image
+    req.body.coverImage = 'http://imgur.com/ilEQt2w.png'; // set it to the default
+  };
   Playlist.create(req.body, function(err, createdPlaylist){
     res.redirect('/playlists/' + createdPlaylist.id + '/add-songs');
   });
@@ -181,6 +184,9 @@ router.delete('/:id', function(req, res){
 
 // edit playlist info
 router.put('/:id', function(req, res){
+  if(req.body.coverImage === ""){ // if the user didn't put a cover image
+    req.body.coverImage = 'http://imgur.com/ilEQt2w.png'; // set it to the default
+  };
   Playlist.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(err, updatedPlaylist){
       User.findOne({ 'username': updatedPlaylist.creator }, function(err, foundUser){
         foundUser.playlists.id(req.params.id).remove();
