@@ -14,14 +14,17 @@
             <img src="<%=playlist.coverImage%>">
           </div>
           <div class="show-playlist-stats">
-            <h1><%=playlist.title%></h1>
+            <h1><%=playlist.title%></h1> <form action="/playlists/like/<%=playlist.id%>?_method=PUT" method="POST" id="playlist-like">
+              <a class="playlist-like-button">&hearts;</a>
+            </form><br />
             <em><%=playlist.songs.title.length%> songs
               <% if(playlist.likes > 0){ %>
                 // <%=playlist.likes%> likes
               <% } else { %>
                   // 0 likes
               <% } %>
-            </em><br />
+            </em>
+            <br />
             <em><strong>by:</strong> <%=playlist.creator%></em>
             <% if(currentUser){ %>
               <% if(currentUser.username === playlist.creator) {%>

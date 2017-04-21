@@ -6,6 +6,15 @@ var Song = require('../models/song.js');
 var Comments = require('../models/comment.js');
 var router = express();
 
+// ================== STATUS VARIABLES ==================
+var newPlaylistJoinFirst = false;
+var notYourPlaylist = false;
+var logInLike = false;
+var wrongPass = false;
+var wrongUser = false;
+var alreadyUser = false;
+var notYourAccount = false;
+
 // ====================== GET ROUTES ====================
 // index page
 router.get('/', function(req, res){
@@ -23,13 +32,28 @@ router.get('/', function(req, res){
 router.get('/new', function(req, res){
   if(req.session.currentUser){
     User.find({}, function(err, foundUsers){
-      res.render('playlists/playlists-new.ejs', {
+      return res.render('playlists/playlists-new.ejs', {
         users: foundUsers
       });
     });
   } else {
-      res.send('only members can create playlists, come join us!');
-  }
+        notYourPlaylist = false;
+        logInLike = false;
+        wrongPass = false;
+        wrongUser = false;
+        alreadyUser = false;
+        notYourAccount = false;
+        newPlaylistJoinFirst = true;
+        return res.render('404.ejs', {
+          newPlaylistJoinFirst: newPlaylistJoinFirst,
+          notYourPlaylist: notYourPlaylist,
+          logInLike: logInLike,
+          wrongPass: wrongPass,
+          wrongUser: wrongUser,
+          alreadyUser: alreadyUser,
+          notYourAccount: notYourAccount
+      });
+    }
 });
 
 // add songs to playlist page
@@ -45,12 +69,46 @@ router.get('/:id/add-songs', function(req, res){
 // edit playlist page
 router.get('/:id/edit', function(req, res){
   Playlist.findById(req.params.id, function(err, foundPlaylist){
-    if(req.session.currentUser.username === foundPlaylist.creator) {
-      res.render('playlists/playlists-edit.ejs', {
-        playlist: foundPlaylist
-      });
+    if(req.session.currentUser){
+      if(req.session.currentUser.username === foundPlaylist.creator) {
+        return res.render('playlists/playlists-edit.ejs', {
+          playlist: foundPlaylist
+        });
+      } else {
+          newPlaylistJoinFirst = false;
+          logInLike = false;
+          wrongPass = false;
+          wrongUser = false;
+          alreadyUser = false;
+          notYourAccount = false;
+          notYourPlaylist = true;
+          return res.render('404.ejs', {
+            newPlaylistJoinFirst: newPlaylistJoinFirst,
+            notYourPlaylist: notYourPlaylist,
+            logInLike: logInLike,
+            wrongPass: wrongPass,
+            wrongUser: wrongUser,
+            alreadyUser: alreadyUser,
+            notYourAccount: notYourAccount
+        });
+      }
     } else {
-        res.send('this isn\'t your playlist!');
+        newPlaylistJoinFirst = false;
+        logInLike = false;
+        wrongPass = false;
+        wrongUser = false;
+        alreadyUser = false;
+        notYourAccount = false;
+        notYourPlaylist = true;
+        return res.render('404.ejs', {
+          newPlaylistJoinFirst: newPlaylistJoinFirst,
+          notYourPlaylist: notYourPlaylist,
+          logInLike: logInLike,
+          wrongPass: wrongPass,
+          wrongUser: wrongUser,
+          alreadyUser: alreadyUser,
+          notYourAccount: notYourAccount
+      });
     }
   });
 });
@@ -165,7 +223,22 @@ router.put('/like/:id', function(req, res){
       });
     });
   } else {
-      return res.send('you need to log in to like a playlist!');
+      lnewPlaylistJoinFirst = false;
+      notYourPlaylist = false;
+      logInLike = true;
+      wrongPass = false;
+      wrongUser = false;
+      alreadyUser = false;
+      notYourAccount = false;
+      return res.render('404.ejs', {
+        newPlaylistJoinFirst: newPlaylistJoinFirst,
+        notYourPlaylist: notYourPlaylist,
+        logInLike: logInLike,
+        wrongPass: wrongPass,
+        wrongUser: wrongUser,
+        alreadyUser: alreadyUser,
+        notYourAccount: notYourAccount
+      });
   }
 });
 

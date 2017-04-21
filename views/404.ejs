@@ -2,9 +2,43 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>404 | MIXTAPES</title>
+    <title>ERROR | MIXTAPES</title>
+    <% include ./partials/scripts.ejs %>
   </head>
-  <body>
-    <h1>Error 404: NOT FOUND</h1>
+  <body class="vinyl-bg">
+    <% include ./partials/nav.ejs %>
+    <main>
+      <div class="site-intro">
+        <% if(newPlaylistJoinFirst){ %>
+            <h1><STRONG>ONLY</STRONG> USERS CAN CREATE PLAYLISTS!</h1>
+            <a class="intro-button" href="/sessions/new">LOGIN</a>
+            <a class="intro-button" href="/users/new">COME JOIN US</a>
+        <% } else if(notYourPlaylist){ %>
+          <h1><STRONG>OOPS</STRONG> THAT'S NOT YOUR PLAYLIST!</h1>
+          <%if(currentUser){ %>
+            <a class="intro-button" href="/users/<%=currentUser._id%>">SEE YOUR PLAYLISTS</a>
+          <% } else {%>
+            <a class="intro-button" href="/sessions/new">LOGIN</a> <a class="intro-button" href="/users/new">COME JOIN US</a>
+          <% } %>
+        <% } else if(logInLike){ %>
+            <h1><STRONG>ONLY</STRONG> USERS CAN LIKE PLAYLISTS!</h1>
+            <a class="intro-button" href="/sessions/new">LOGIN</a>
+            <a class="intro-button" href="/users/new">COME JOIN US</a>
+        <% } else if(wrongPass){ %>
+          <h1><STRONG>OOPS</STRONG> WRONG PASSWORD!</h1>
+          <a class="intro-button" href="/sessions/new">TRY AGAIN</a>
+        <% } else if(wrongUser){ %>
+          <h1><STRONG>OOPS</STRONG> WRONG USERNAME!</h1>
+          <a class="intro-button" href="/sessions/new">TRY AGAIN</a>
+        <% } else if(alreadyUser){ %>
+          <h1><STRONG>OOPS</STRONG> YOU'RE ALREADY A USER! LOG OUT TO MAKE A NEW ACCOUNT!</h1>
+        <% } else if(notYourAccount){ %>
+          <h1><STRONG>OOPS</STRONG> THIS ISN'T YOUR ACCOUNT!</h1>
+          <a class="intro-button" href="/users/<%=currentUser._id%>">SEE YOUR ACCOUNT</a>
+        <% } else { %>
+            <h1><STRONG>404</STRONG> PAGE NOT FOUND!</h1>
+        <% } %>
+      </div>
+    </main>
   </body>
 </html>

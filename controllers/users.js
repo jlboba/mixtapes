@@ -7,6 +7,15 @@ var Song = require('../models/song.js');
 var Comments = require('../models/comment.js');
 var router = express();
 
+// ================== STATUS VARIABLES ==================
+var newPlaylistJoinFirst = false;
+var notYourPlaylist = false;
+var logInLike = false;
+var wrongPass = false;
+var wrongUser = false;
+var alreadyUser = false;
+var notYourAccount = false;
+
 // ====================== GET ROUTES ====================
 // users index page
 router.get('/', function(req, res){
@@ -22,7 +31,22 @@ router.get('/new', function(req, res){
   if(!req.session.currentUser) {
     return res.render('users/users-new.ejs');
   } else {
-      return res.send('you already have an account! log out to create a new one');
+      newPlaylistJoinFirst = false;
+      notYourPlaylist = false;
+      logInLike = false;
+      wrongPass = false;
+      wrongUser = false;
+      notYourAccount = false;
+      alreadyUser = true;
+      return res.render('404.ejs', {
+        newPlaylistJoinFirst: newPlaylistJoinFirst,
+        notYourPlaylist: notYourPlaylist,
+        logInLike: logInLike,
+        wrongPass: wrongPass,
+        wrongUser: wrongUser,
+        alreadyUser: alreadyUser,
+        notYourAccount: notYourAccount
+      });
   }
 });
 
@@ -44,7 +68,22 @@ router.get('/:id/edit', function(req, res){
         user: foundUser
       });
     } else {
-        return res.send('this isn\'t your account silly!');
+        newPlaylistJoinFirst = false;
+        notYourPlaylist = false;
+        logInLike = false;
+        wrongPass = false;
+        wrongUser = false;
+        alreadyUser = false;
+        notYourAccount = true;
+        return res.render('404.ejs', {
+          newPlaylistJoinFirst: newPlaylistJoinFirst,
+          notYourPlaylist: notYourPlaylist,
+          logInLike: logInLike,
+          wrongPass: wrongPass,
+          wrongUser: wrongUser,
+          alreadyUser: alreadyUser,
+          notYourAccount: notYourAccount
+        });
     }
   });
 });

@@ -29,6 +29,8 @@ $(function(){ // start window onload
   // add comment
   $('.playlist-comment-button').on('click', submitButtons.addComment);
 
+  // like playlist
+  $('.playlist-like-button').on('click', submitButtons.likePlaylist)
   // ------- songs
   // generate a new song field (add songs)
   $('.generate-new-song-field').on('click', addingSongs.generateSongField);
@@ -161,6 +163,9 @@ var submitButtons = {
     } else {
       $('.comment-form').submit();
     }
+  },
+  likePlaylist: function(){
+    $('#playlist-like').submit();
   }
 }
 

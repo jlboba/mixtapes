@@ -28,6 +28,15 @@ app.use(methodOverride('_method'));
 // static files
 app.use(express.static('public'));
 
+// ================== STATUS VARIABLES ==================
+var newPlaylistJoinFirst = false;
+var notYourPlaylist = false;
+var logInLike = false;
+var wrongPass = false;
+var wrongUser = false;
+var alreadyUser = false;
+var notYourAccount = false;
+
 // ==================== CONTROLLERS =====================
 // user
 var userController = require('./controllers/users.js');
@@ -52,7 +61,15 @@ app.get('/', function(req, res){
 // 404 - if page cannot be found, render the 404 page
 app.use(function(req, res){
   res.status(404);
-  res.render('404.ejs');
+  res.render('404.ejs', {
+    newPlaylistJoinFirst: newPlaylistJoinFirst,
+    notYourPlaylist: notYourPlaylist,
+    logInLike: logInLike,
+    wrongPass: wrongPass,
+    wrongUser: wrongUser,
+    alreadyUser: alreadyUser,
+    notYourAccount: notYourAccount
+  });
 });
 
 // ================ MONGOOSE CONNECTION =================
