@@ -23,6 +23,12 @@ $(function(){ // start window onload
   // edit playlist
   $('.edit-playlist-button').on('click', submitButtons.editPlaylistForm);
 
+  // show playlist page toggle
+  $('.song-title').on('click', playlist.toggleSongs);
+
+  // add comment
+  $('.playlist-comment-button').on('click', submitButtons.addComment);
+
   // ------- songs
   // generate a new song field (add songs)
   $('.generate-new-song-field').on('click', addingSongs.generateSongField);
@@ -145,8 +151,19 @@ var submitButtons = {
     } else {
       $('.edit-playlist').submit();
     }
+  },
+  addComment: function(){
+    var $body = $('#comment-body');
+    var $error = $('.comment-error-message');
+    if($body.val() === ''){
+      $body.addClass('form-validate');
+      $error.html('<em>please provide an actual comment!</em>');
+    } else {
+      $('.comment-form').submit();
+    }
   }
 }
+
 // adding/editing songs object (and global variable)
 var songCount = 1;
 
@@ -166,5 +183,12 @@ var addingSongs = {
   },
   editSongsForm: function(){
     $('.songs-edit-form').submit();
+  }
+}
+
+// show playlist object
+var playlist = {
+  toggleSongs: function(){
+    $(this).siblings().toggle("slow");
   }
 }

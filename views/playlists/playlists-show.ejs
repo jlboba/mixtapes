@@ -2,50 +2,106 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title><%=playlist.title%> | MIXTAPES</title>
+    <title><%=playlist.title.toUpperCase()%> | MIXTAPES</title>
+    <% include ../partials/scripts.ejs %>
   </head>
   <body>
-    <h1><%=playlist.title%></h1>
-    <img src="<%=playlist.coverImage%>">
-    <p>
-      created by: <a href="/users/<%=user.id%>"><%=playlist.creator%></a><br />
-      likes: <%=playlist.likes%><br/>
-      <%=playlist.description%>
-    </p>
-    <ul>
-      <% for(var i = 0; i < playlist.songs.title.length; i++){ %>
-          <li>
-            <a href="<%=playlist.songs.link[i]%>"><%=playlist.songs.title[i]%> - <%=playlist.songs.artist[i]%></a>
-            <p>
-              <%=playlist.songs.description[i]%>
-            </p>
-          </li>
-      <% } %>
-    </ul>
-    <h2>COMMENTS</h2>
-    <ul>
-      <% for(var i = 0; i < playlist.comments.length; i++){ %>
-          <li>
-            <%=playlist.comments[i].author%> said: <%=playlist.comments[i].body%>
-          </li>
-      <% } %>
-    </ul>
-    <% if(currentUser) {%>
-      <h2>LEAVE A COMMENT!</h2>
-      <form action="/playlists/comment/<%=playlist.id%>" method="POST">
-        <img src="<%=currentUser.icon%>" style="width: 100px; height: 100px;"> <small><%=currentUser.username%></small>
-        <textarea name="body" placeholder="comment"></textarea>
-        <input type="submit" value="submit" />
-      </form>
-      <% if(currentUser.username === playlist.creator) { %>
-        <a href="/playlists/<%=playlist.id%>/edit">EDIT</a>
-        <form action="/playlists/<%=playlist.id%>?_method=DELETE" method="POST">
-          <input type="submit" value="DELETE" />
-        </form>
-      <% } %>
-    <% } %>
-    <form action="/playlists/like/<%=playlist.id%>?_method=PUT" method="POST">
-      <input type="submit" value="LIKE &hearts;" />
-    </form>
+    <% include ../partials/nav.ejs %>
+    <main>
+      <section class="show-playlist">
+        <div class="show-playlist-info">
+          <div class="show-playlist-cover">
+            <img src="<%=playlist.coverImage%>">
+          </div>
+          <div class="show-playlist-stats">
+            <h1><%=playlist.title%></h1>
+            <em><%=playlist.songs.title.length%> songs
+              <% if(playlist.likes > 0){ %>
+                // <%=playlist.likes%> likes
+              <% } else { %>
+                  // 0 likes
+              <% } %>
+            </em><br />
+            <em><strong>by:</strong> <%=playlist.creator%></em>
+            <% if(currentUser){ %>
+              <% if(currentUser.username === playlist.creator) {%>
+                <em>//
+                  <a href="/playlists/<%=playlist.id%>/edit">EDIT</a> //
+                  <form action="/playlists/<%=playlist.id%>?_method=DELETE" method="POST" class="playlist-delete-form">
+                    <a class="playlist-delete-button">DELETE</a>
+                  </form>
+                </em>
+              <% } %>
+            <% } %>
+              <blockquote>
+                <%=playlist.description%>
+              </blockquote>
+          </div>
+        </div>
+        <div class="show-playlist-songs">
+          <h2><%=playlist.title%>'s <strong>tracks</strong></h2>
+            <% for(var i = 0; i < playlist.songs.title.length; i++){ %>
+              <div class="song-container">
+                <div class="song-title">
+                  <strong><%=playlist.songs.title[i]%></strong> (<%=playlist.songs.artist[i]%>)
+                  <div class="song-title-toggle">
+                    <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="song-play-container">
+                  <div class="song-play">
+                    <% var splitLink = playlist.songs.link[i].split('='); %>
+                    <% var youtubeId = splitLink[1]%>
+                    <div class="song-video">
+                      <iframe src="https://www.youtube.com/embed/<%=youtubeId%>" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="song-description">
+                      <p><i class="fa fa-quote-left" aria-hidden="true"></i>
+                      <% if(playlist.songs.description[i] === '') { %>
+                        this song has no description, just listen and decide its meaning on your own</p>
+                      <% } else { %>
+                            <%=playlist.songs.description[i]%>
+                            </p>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+        </div>
+        <div class="show-playlist-comments">
+          <h2><%=playlist.title%>'s <strong>COMMENTS</strong></h2>
+          <% if(playlist.comments.length === 0){ %>
+              <div class="song-comments">
+                NO COMMENTS!
+              </div>
+          <% } %>
+          <% for(var i = 0; i < playlist.comments.length; i++){ %>
+            <div class="song-comments">
+              <strong>
+              <%=playlist.comments[i].author%> said:</strong>
+              <p>
+                <%=playlist.comments[i].body%>
+              </p>
+            </div>
+          <% } %>
+          <% if(currentUser) {%>
+            <h2>LEAVE A <strong>COMMENT</strong></h2>
+            <div class="playlist-comment">
+              <div class="playlist-comment-icon">
+                <img src="<%=currentUser.icon%>">
+              </div>
+              <div class="playlist-comment-form">
+                <form action="/playlists/comment/<%=playlist.id%>" method="POST" class="comment-form">
+                  <em>leaving comment as <%=currentUser.username%></em><br />
+                  <textarea name="body" placeholder="comment" id="comment-body"></textarea>
+                  <br /><a class="playlist-comment-button">SUBMIT</a> <span class="comment-error-message"></span>
+                </form>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
