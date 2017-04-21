@@ -23,6 +23,9 @@ $(function(){ // start window onload
   // edit playlist
   $('.edit-playlist-button').on('click', submitButtons.editPlaylistForm);
 
+  // delete playlist
+  $('.playlist-delete-button').on('click', submitButtons.deletePlaylist);
+
   // show playlist page toggle
   $('.song-title').on('click', playlist.toggleSongs);
 
@@ -153,6 +156,9 @@ var submitButtons = {
     } else {
       $('.edit-playlist').submit();
     }
+  },
+  deletePlaylist: function(){
+    $('.playlist-delete-form').submit();
   },
   addComment: function(){
     var $body = $('#comment-body');
