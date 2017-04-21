@@ -291,5 +291,76 @@ router.get('/:id/seed-ghibli', function(req, res){
   });
 });
 
+var pixarSeed = {
+  title: ['Married Life', 'You\'ve Got a Friend in Me', 'If I Didn\'t Have You', 'Life is a Highway', 'Touch The Sky'],
+  artist: ['Michael Giacchino', 'Randy Newman', 'Billy Crystal & John Goodman', 'Rascal Flatts', 'Julie Fowlis'],
+  link: ['https://www.youtube.com/watch?v=7WW2I0S1e0M', 'https://www.youtube.com/watch?v=McooXVFA1BM', 'https://www.youtube.com/watch?v=fEqrt6nZTS4', 'https://www.youtube.com/watch?v=gn19U2lMNnw', 'https://www.youtube.com/watch?v=PAD_E1kaYuY'],
+  description: ['The soundtrack from perhaps the most iconic, incredibly depressing scene in Up', '' , 'From: Monster\'s Inc. We could all use a Sulley to our Mike', 'All together now: LIFE IS A HIIIIGHWAY', 'From: Brave'],
+};
+
+// seed pixar songs route
+router.get('/:id/seed-pixar', function(req, res){
+  Song.create(pixarSeed, function(err, seededSongs){
+    Playlist.findById(req.params.id, function(err, foundPlaylist){
+      foundPlaylist.songs = seededSongs;
+      foundPlaylist.save(function(err, savedPlaylist){
+        User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
+          foundUser.playlists.push(savedPlaylist);
+          foundUser.save(function(err, savedUser){
+            res.redirect('/playlists/' + req.params.id);
+          });
+        });
+      });
+    });
+  });
+});
+
+var disneySeed = {
+  title: ['When Will My Life Begin', 'I\'ll Make a Man Out of You', 'Hawaiian Roller Coaster Ride', 'Circle of Life', 'Kiss the Girl'],
+  artist: ['Mandy Moore', 'Donny Osmond', 'M. Keali\'i Ho\' Omalu', 'Carmen Twillie & Lebo M', 'Samuel Wright'],
+  link: ['https://www.youtube.com/watch?v=RMyriShiofs', 'https://www.youtube.com/watch?v=2It7rctaQE4', 'https://www.youtube.com/watch?v=p09oZj7G0gg', 'https://www.youtube.com/watch?v=p0eeL74BSpk', 'https://www.youtube.com/watch?v=TrRbB-qUJfY'],
+  description: ['An upbeat opening song in which I wish I, too, could finish chores by 7:15 AM', 'LET\'S GET DOWN TO BUSINESS... to defeat the bugs', 'From: My childhood, ah the nostalgia', 'One of the most iconic opening songs from any Disney movie', 'Shalalalalalala'],
+};
+
+// seed disney songs route
+router.get('/:id/seed-disney', function(req, res){
+  Song.create(disneySeed, function(err, seededSongs){
+    Playlist.findById(req.params.id, function(err, foundPlaylist){
+      foundPlaylist.songs = seededSongs;
+      foundPlaylist.save(function(err, savedPlaylist){
+        User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
+          foundUser.playlists.push(savedPlaylist);
+          foundUser.save(function(err, savedUser){
+            res.redirect('/playlists/' + req.params.id);
+          });
+        });
+      });
+    });
+  });
+});
+
+var gameSeed = {
+  title: ['Mother I\'m Here', 'Undertale', 'Home', 'Die Anywhere Else', 'We Move Together'],
+  artist: ['Darren Korb', 'Toby Fox', 'Toby Fox', 'Carmen Twillie & Lebo M', '"Lucio"'],
+  link: ['https://www.youtube.com/watch?v=YlfUcnSbKDA', 'https://www.youtube.com/watch?v=tz82xbLvK_k', 'https://www.youtube.com/watch?v=5_E_y1AWAfc', 'https://www.youtube.com/watch?v=EQw9uvGElx4', 'https://www.youtube.com/watch?v=cLM4yxrazK8'],
+  description: ['', 'Just try and tell me this isn\'t one of the best boss fight tracks', 'Couln\'t help myself from adding a second, Undertale\'s soundtrack is full of gems', 'The flagship song of one of my favorite games this year, Night in the Woods', '[Lucio Voice] Movin\' with the payload!'],
+};
+
+// seed game songs route
+router.get('/:id/seed-game', function(req, res){
+  Song.create(gameSeed, function(err, seededSongs){
+    Playlist.findById(req.params.id, function(err, foundPlaylist){
+      foundPlaylist.songs = seededSongs;
+      foundPlaylist.save(function(err, savedPlaylist){
+        User.findOne({'username': savedPlaylist.creator}, function(err, foundUser){
+          foundUser.playlists.push(savedPlaylist);
+          foundUser.save(function(err, savedUser){
+            res.redirect('/playlists/' + req.params.id);
+          });
+        });
+      });
+    });
+  });
+});
 // ====================== EXPORT ========================
 module.exports = router;
